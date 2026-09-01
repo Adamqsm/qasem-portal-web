@@ -1,0 +1,24 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# env — real values never enter the repo
+.env
+.env.local
+.env.*.local
+
+# testing
+/coverage
+
+# misc
+.DS_Store

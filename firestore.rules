@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// Deny-all, deliberately and completely.
+//
+// This site has NO client-side Firebase SDK: every Firestore access goes
+// through the server-side Admin SDK in /api/contact (which bypasses rules).
+// The collections that exist are:
+//   contactSubmissions  — general inquiry form records   (Admin SDK only)
+//   careerSubmissions   — careers form records           (Admin SDK only)
+//   contactRateLimits   — salted-IP rate-limit counters  (Admin SDK only)
+//
+// Every one of them is covered by the deny-all match below, on purpose.
+// If a client-readable collection is ever added, it needs its OWN explicit
+// match block and a rules test — never widen this one. (Cue shipped a
+// collection with no rule at all and silently 403'd real leads for weeks;
+// a single audited deny-all is how this repo avoids that class of bug.)
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

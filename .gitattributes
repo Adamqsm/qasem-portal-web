@@ -1,0 +1,11 @@
+# Normalise every text file to LF in the repo and on checkout.
+# (Cue-web lacked this and its CRLF working tree produced whole-file false
+# diffs on every edit — this line prevents that class of problem entirely.)
+* text=auto eol=lf
+
+# Binary assets — never normalise.
+*.png binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

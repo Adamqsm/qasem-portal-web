@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Placeholder tokens — the full design system lands with the first feature
+   branch. Kept minimal so the scaffold builds. */
+:root {
+  --c-paper: 250 250 248;
+  --c-surface: 255 255 255;
+  --c-ink: 17 17 17;
+  --c-muted: 82 82 78;
+  --c-faint: 107 107 102;
+  --c-line: 218 217 212;
+  --c-error: 160 59 46;
+  --c-cue: 200 107 74;
+  --font-serif: Georgia;
+  --font-sans: system-ui;
+}
+
+.dark {
+  --c-paper: 17 17 17;
+  --c-surface: 24 24 22;
+  --c-ink: 244 243 239;
+  --c-muted: 171 171 164;
+  --c-faint: 138 138 132;
+  --c-line: 42 42 40;
+  --c-error: 227 156 143;
+}
+
+body {
+  @apply bg-paper text-ink;
+}
