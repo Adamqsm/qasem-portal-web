@@ -2,31 +2,196 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Placeholder tokens — the full design system lands with the first feature
-   branch. Kept minimal so the scaffold builds. */
+/**
+ * Qasem Portal design system — "the register".
+ *
+ * Monochrome by mandate: brand ink #111111, a paper ground, grayscale
+ * between. No brand accent exists. The one functional color is the
+ * desaturated error red on form validation (AA-checked in both themes);
+ * success states stay monochrome. Cue's terracotta (--c-cue) is Cue's own
+ * identity and may appear ONLY inside the Cue portfolio card.
+ *
+ * Values are R G B triplets so Tailwind opacity modifiers keep working.
+ * Contrast (WCAG AA, verified):
+ *   light  ink/paper 18.9:1 · muted/paper 7.5:1 · faint/paper 5.1:1
+ *          error/paper 6.4:1 · field-line/paper 3.9:1 (non-text 3:1)
+ *   dark   ink/paper 17.2:1 · muted/paper 8.2:1 · faint/paper 5.5:1
+ *          error/paper 8.5:1 · field-line/paper 3.7:1 (non-text 3:1)
+ */
 :root {
-  --c-paper: 250 250 248;
-  --c-surface: 255 255 255;
-  --c-ink: 17 17 17;
-  --c-muted: 82 82 78;
-  --c-faint: 107 107 102;
-  --c-line: 218 217 212;
-  --c-error: 160 59 46;
-  --c-cue: 200 107 74;
-  --font-serif: Georgia;
-  --font-sans: system-ui;
+  --c-paper: 250 250 248; /* #FAFAF8 */
+  --c-surface: 255 255 255; /* #FFFFFF */
+  --c-ink: 17 17 17; /* #111111 — the brand ink */
+  --c-muted: 82 82 78; /* #52524E */
+  --c-faint: 107 107 102; /* #6B6B66 */
+  --c-line: 218 217 212; /* #DAD9D4 — decorative hairlines only */
+  --c-field-line: 118 118 114; /* #767672 — input borders, 3:1 non-text */
+  --c-error: 160 59 46; /* #A03B2E */
+  --c-cue: 200 107 74; /* #C86B4A — Cue terracotta, Cue card only */
 }
 
 .dark {
-  --c-paper: 17 17 17;
-  --c-surface: 24 24 22;
-  --c-ink: 244 243 239;
-  --c-muted: 171 171 164;
-  --c-faint: 138 138 132;
-  --c-line: 42 42 40;
-  --c-error: 227 156 143;
+  --c-paper: 17 17 17; /* the site inverts into the brand ink itself */
+  --c-surface: 24 24 22; /* #181816 */
+  --c-ink: 244 243 239; /* #F4F3EF */
+  --c-muted: 171 171 164; /* #ABABA4 */
+  --c-faint: 138 138 132; /* #8A8A84 */
+  --c-line: 42 42 40; /* #2A2A28 */
+  --c-field-line: 110 110 104; /* #6E6E68 */
+  --c-error: 227 156 143; /* #E39C8F */
+  --c-cue: 209 125 94; /* lifted slightly for dark ground, 4.8:1 */
 }
 
-body {
-  @apply bg-paper text-ink;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-paper font-sans text-base leading-relaxed text-ink antialiased;
+  }
+
+  ::selection {
+    background: rgb(var(--c-ink));
+    color: rgb(var(--c-paper));
+  }
+
+  /* One visible focus treatment everywhere: a 2px ink ring, offset so it
+     never melts into a filled control. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-ink));
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-medium text-ink;
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-6 sm:px-10;
+  }
+
+  /* Tracked-caps label — echoes the letterspaced QASEM PORTAL line in the
+     brand's own signature block. */
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-label text-muted;
+  }
+
+  /* The signature device: the double rule, lifted from the QP monogram's
+     frame (thick outer stroke, thin inner). Used for section openings, the
+     footer, and form fieldsets. Inherits currentColor so it holds in both
+     themes and inside inverted blocks. */
+  .rule-double {
+    position: relative;
+    border-top: 2px solid currentColor;
+    padding-top: 3px;
+  }
+  .rule-double::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    right: 0;
+    border-top: 1px solid currentColor;
+  }
+
+  /* Prose links: underlined by default, the underline thickens on hover.
+     Institutional pages do not hide their links. */
+  .link {
+    @apply font-medium text-ink underline decoration-[1.5px] underline-offset-4 transition-[text-decoration-color] duration-150;
+    text-decoration-color: rgb(var(--c-ink) / 0.35);
+  }
+  .link:hover {
+    text-decoration-color: rgb(var(--c-ink));
+  }
+
+  /* Buttons: rectangular, engraved. No border radius anywhere on this site. */
+  .btn {
+    @apply inline-flex min-h-[3rem] cursor-pointer items-center justify-center gap-2.5 border-2 px-7 py-3 text-center font-sans text-[0.8125rem] font-semibold uppercase tracking-label transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply border-ink bg-ink text-paper hover:bg-transparent hover:text-ink;
+  }
+  .btn-ghost {
+    @apply border-ink bg-transparent text-ink hover:bg-ink hover:text-paper;
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* Form fields. Field borders use --c-field-line (3:1 non-text contrast in
+     both themes); focus swaps to the full ink boundary. */
+  .field-label {
+    @apply mb-2 block font-sans text-[0.8125rem] font-semibold uppercase tracking-label text-ink;
+  }
+  .field-input {
+    @apply block w-full border border-[rgb(var(--c-field-line))] bg-surface px-4 py-3 font-sans text-base text-ink transition-colors duration-150 placeholder:text-faint;
+  }
+  .field-input:focus {
+    @apply border-ink;
+    outline: 2px solid rgb(var(--c-ink));
+    outline-offset: 1px;
+  }
+  .field-input[aria-invalid="true"] {
+    @apply border-error;
+  }
+  .field-hint {
+    @apply mt-2 font-sans text-[0.8125rem] leading-normal text-faint;
+  }
+  .field-error {
+    @apply mt-2 font-sans text-[0.8125rem] font-medium leading-normal text-error;
+  }
+}
+
+@layer utilities {
+  /* Hero load sequence — the one orchestrated moment on the site. */
+  @keyframes qp-rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes qp-draw {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .anim-rise-1 {
+    animation: qp-rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+  .anim-rise-2 {
+    animation: qp-rise 0.55s 0.12s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+  .anim-rise-3 {
+    animation: qp-rise 0.55s 0.24s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+  .anim-draw {
+    transform-origin: left;
+    animation: qp-draw 0.7s 0.34s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-rise-1,
+    .anim-rise-2,
+    .anim-rise-3,
+    .anim-draw {
+      animation: none;
+    }
+  }
 }

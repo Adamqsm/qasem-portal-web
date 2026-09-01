@@ -36,6 +36,8 @@ const config: Config = {
           "Segoe UI",
           "sans-serif",
         ],
+        // Cue's own face, subset to the glyphs of "Cue" — portfolio card only.
+        cue: ["var(--font-cue)", "var(--font-sans)", "sans-serif"],
       },
       letterSpacing: {
         label: "0.14em",
