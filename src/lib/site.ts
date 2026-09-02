@@ -6,7 +6,7 @@ export const SITE_NAME = "Qasem Portal";
 
 /** One sentence, reused as the default meta description and JSON-LD text. */
 export const SITE_DESCRIPTION =
-  "Qasem Portal is the parent company of Cue: the licensing, legal, and governance layer above the venture. Registered in Dubai, United Arab Emirates.";
+  "Qasem Portal is a technology company building modern applications for hospitality and adjacent sectors. Registered in Dubai, United Arab Emirates.";
 
 /** Cue's canonical origin and Organization node id (matches Cue-web's graph). */
 export const CUE_URL = "https://www.cue-app.net";
