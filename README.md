@@ -1,8 +1,9 @@
 # Qasem Portal — corporate site
 
 Marketing/corporate site for [qasem-portal.com](https://www.qasem-portal.com).
-Qasem Portal is the parent company of Cue: the licensing, legal, and
-governance layer above the venture. This site is its professional front door.
+Qasem Portal is a technology company building modern applications for
+hospitality and adjacent sectors. It builds and operates app-driven ventures;
+Cue is its first. This site is its professional front door.
 
 ## Stack
 

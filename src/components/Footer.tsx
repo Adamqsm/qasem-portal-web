@@ -17,8 +17,9 @@ export default function Footer() {
           <div className="max-w-sm">
             <Wordmark heightPx={56} />
             <p className="mt-6 text-[0.9375rem] leading-relaxed text-muted">
-              The parent company of Cue. Registered in Dubai, United Arab
-              Emirates.
+              A technology company building modern applications for
+              hospitality and adjacent sectors. Registered in Dubai, United
+              Arab Emirates, under an apps and software activity licence.
             </p>
           </div>
           <nav aria-label="Site">
