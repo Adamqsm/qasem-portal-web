@@ -17,10 +17,10 @@ export default function PrivacyPage() {
     <LegalShell title="Privacy Policy" updated={UPDATED}>
       <LegalSection heading="Who we are">
         <p>
-          Qasem Portal is the parent company of Cue, registered in Dubai,
-          United Arab Emirates. This policy covers the website at
-          qasem-portal.com. Cue&apos;s own products and websites have their own
-          policies, published by Cue.
+          Qasem Portal is a technology company registered in Dubai, United
+          Arab Emirates, and Cue is its first venture. This policy covers
+          the website at qasem-portal.com. Cue&apos;s own products and
+          websites have their own policies, published by Cue.
         </p>
       </LegalSection>
 

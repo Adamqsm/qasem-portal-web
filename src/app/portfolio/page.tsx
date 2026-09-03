@@ -8,7 +8,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/portfolio",
   title: "Portfolio",
   description:
-    "The ventures under Qasem Portal. Today, Cue: a restaurant reservation and venue booking platform in Amman, Jordan.",
+    "The ventures within Qasem Portal. Today, Cue: a restaurant reservation and venue booking platform in Amman, Jordan.",
 });
 
 export default function PortfolioPage() {
@@ -17,11 +17,11 @@ export default function PortfolioPage() {
       <section className="container-site pb-16 pt-20 sm:pb-20 sm:pt-28">
         <p className="eyebrow">The portfolio</p>
         <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
-          Ventures under Qasem Portal.
+          Qasem Portal&apos;s ventures.
         </h1>
         <p className="mt-8 max-w-measure font-serif text-xl leading-[1.65] text-muted">
-          Each venture operates under its own entity and its own brand, with
-          Qasem Portal above it. There is one venture today.
+          Each venture operates under its own entity and its own brand,
+          within Qasem Portal. There is one venture today.
         </p>
       </section>
 

@@ -6,5 +6,5 @@ export const contentType = OG_CONTENT_TYPE;
 export const dynamic = "force-static";
 
 export default function Image() {
-  return buildOgImage("Ventures under Qasem Portal.");
+  return buildOgImage("Qasem Portal's ventures.");
 }
