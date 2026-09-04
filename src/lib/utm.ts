@@ -78,8 +78,13 @@ export function utmFromSearch(search: string): UtmParams | null {
  * win over these — see the first-touch rule in captureUtm.
  */
 export function withUtm(href: string, content: string): string {
-  const joiner = href.includes("?") ? "&" : "?";
-  return `${href}${joiner}utm_source=qasem-site&utm_medium=internal&utm_content=${encodeURIComponent(content)}`;
+  // A fragment has to stay last: "/contact#careers" must become
+  // "/contact?utm_...#careers", never "/contact#careers?utm_...".
+  const hashAt = href.indexOf("#");
+  const base = hashAt === -1 ? href : href.slice(0, hashAt);
+  const hash = hashAt === -1 ? "" : href.slice(hashAt);
+  const joiner = base.includes("?") ? "&" : "?";
+  return `${base}${joiner}utm_source=qasem-site&utm_medium=internal&utm_content=${encodeURIComponent(content)}${hash}`;
 }
 
 // ---- Client capture (no-ops on the server) --------------------------------
