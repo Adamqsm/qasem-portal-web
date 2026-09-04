@@ -129,6 +129,15 @@ submissions still store without it, only the courtesy email is skipped.
 
 - [ ] `curl -sI https://www.qasem-portal.com | grep -iE "content-security|frame|referrer|strict-transport"`
       shows the full header set from `next.config.mjs`.
+- [ ] `curl -sI https://qasem-portal.com | grep -iE "^(HTTP|location|strict-transport)"`
+      shows a 308 to `https://www.qasem-portal.com/` that ITSELF carries
+      `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`.
+      hstspreload.org checks the apex redirect response, not just the final
+      page. The apex -> www redirect is defined in `next.config.mjs`
+      (`redirects()`), NOT as a Vercel project-domain redirect: the platform
+      redirect bypasses the app and only sends Vercel's bare default header.
+      If someone re-adds the domain redirect in the Vercel dashboard, this
+      check fails.
 - [ ] Submit the contact form once on a PREVIEW deployment (proves the
       Turnstile `vercel.app` hostname) and once on production. Each lands
       in Firestore (`contactSubmissions`) AND in the inbox, with reply-to

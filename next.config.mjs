@@ -47,12 +47,13 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
   },
-  // Vercel already sends max-age=63072000; includeSubDomains is the addition.
-  // `preload` is deliberately NOT set — the HSTS preload list is effectively
-  // irreversible and is Adam's call, not a code change.
+  // Exactly what hstspreload.org requires: max-age >= 1 year, includeSubDomains,
+  // preload. Vercel's default (max-age=63072000, no directives) is overridden
+  // by this value. `preload` was added on Adam's explicit decision (2026-09-04);
+  // the preload list is effectively irreversible, so do not drop it casually.
   {
     key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains",
+    value: "max-age=31536000; includeSubDomains; preload",
   },
 ];
 
@@ -61,6 +62,20 @@ const nextConfig = {
   reactStrictMode: true,
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  // Apex -> www is served by the app (not as a Vercel project-domain
+  // redirect) so the 308 itself carries the security headers above.
+  // hstspreload.org checks the HSTS header on the apex redirect response, and
+  // the platform-level domain redirect only sends Vercel's bare default.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "qasem-portal.com" }],
+        destination: "https://www.qasem-portal.com/:path*",
+        permanent: true,
+      },
+    ];
   },
 };
 
