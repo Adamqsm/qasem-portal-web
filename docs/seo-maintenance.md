@@ -38,7 +38,7 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
    anywhere are legitimate here. A concentration in one country is not a
    signal to act on, and a spread across many is the intended outcome.
 
-2. **Indexing → Pages.** Indexed count against an expected **5** (update the
+2. **Indexing → Pages.** Indexed count against an expected **6** (update the
    expectation when routes ship). `/_not-found` and `/api/*` should never
    appear as indexed; if one does, something regressed. A real content URL
    sitting in "Crawled – currently not indexed" or "Discovered – currently
@@ -149,10 +149,12 @@ Two steps need a signed-in browser and were not completed in the audit pass
 because the machine's Chrome went offline. Neither is urgent, and neither is
 a code change.
 
-- **Request Indexing** on all five URLs, through Search Console's URL
+- **Request Indexing** on all six URLs, through Search Console's URL
   Inspection tool. On a two-day-old domain with zero inbound links this is
   the fastest legitimate way to get first crawl, and it only has to be done
-  once. Tick them off in the run log when done.
+  once. Tick them off in the run log when done. `/careers` shipped after the
+  sitemap was first read, so it is owed the same request as the original
+  five.
 - **Rich Results Test** on `/` and `/portfolio`, per monthly step 7. The
   graph has been validated structurally (every `@id` reference resolves, no
   type conflicts, Cue's node consistent across both pages, Organization

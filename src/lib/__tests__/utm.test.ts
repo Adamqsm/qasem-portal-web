@@ -46,4 +46,10 @@ describe("withUtm", () => {
   it("appends with & when a query already exists", () => {
     expect(withUtm("/contact?x=1", "cta")).toContain("?x=1&utm_source=");
   });
+
+  it("keeps a fragment after the query so the anchor still resolves", () => {
+    expect(withUtm("/contact#careers", "careers-cta")).toBe(
+      "/contact?utm_source=qasem-site&utm_medium=internal&utm_content=careers-cta#careers"
+    );
+  });
 });

@@ -152,6 +152,9 @@ describe("copy rules hold in machine-readable text too", () => {
   const allText = [
     JSON.stringify(siteJsonLd()),
     JSON.stringify(portfolioJsonLd()),
+    JSON.stringify(
+      pageJsonLd({ path: "/careers", name: "Career Growth and Learning", description: "D" })
+    ),
     KEYWORDS.join(" "),
   ].join(" ");
 
@@ -177,7 +180,14 @@ describe("the route register", () => {
 
   it("covers every indexable route exactly once", () => {
     const paths = PAGES.map((p) => p.path);
-    expect(paths).toEqual(["", "/portfolio", "/contact", "/legal/privacy", "/legal/terms"]);
+    expect(paths).toEqual([
+      "",
+      "/portfolio",
+      "/careers",
+      "/contact",
+      "/legal/privacy",
+      "/legal/terms",
+    ]);
     expect(new Set(paths).size).toBe(paths.length);
   });
 });

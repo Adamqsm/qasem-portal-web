@@ -76,6 +76,7 @@ export const KEYWORDS = [
 
 export const NAV_ITEMS = [
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -90,6 +91,7 @@ export const NAV_ITEMS = [
 export const PAGES = [
   { path: "", label: "Home", lastModified: "2026-09-04", changeFrequency: "monthly" },
   { path: "/portfolio", label: "Portfolio", lastModified: "2026-09-04", changeFrequency: "monthly" },
+  { path: "/careers", label: "Career Growth and Learning", lastModified: "2026-09-04", changeFrequency: "yearly" },
   { path: "/contact", label: "Contact", lastModified: "2026-09-04", changeFrequency: "yearly" },
   { path: "/legal/privacy", label: "Privacy Policy", lastModified: "2026-09-02", changeFrequency: "yearly" },
   { path: "/legal/terms", label: "Terms of Use", lastModified: "2026-09-02", changeFrequency: "yearly" },

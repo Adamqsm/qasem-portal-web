@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { buildMetadata, pageJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import ContactForm from "@/components/ContactForm";
@@ -88,6 +89,14 @@ export default function ContactPage() {
               worth hearing from: introduce yourself, and if there is a fit at
               Qasem Portal or one of its ventures, now or later, you will hear
               back.
+            </p>
+            <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
+              What the company commits to the people it employs is set out
+              on the{" "}
+              <Link href="/careers" className="link">
+                Career Growth and Learning
+              </Link>{" "}
+              page.
             </p>
             <div className="mt-10">
               <ContactForm kind="careers" />
