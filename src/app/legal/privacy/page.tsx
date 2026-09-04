@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, pageJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import { LegalSection, LegalShell } from "@/components/LegalShell";
+
+const DESCRIPTION =
+  "How Qasem Portal handles the information submitted through this site: what is collected, why, where it is stored, and the choices you have.";
 
 export const metadata: Metadata = buildMetadata({
   path: "/legal/privacy",
   title: "Privacy Policy",
-  description:
-    "How Qasem Portal handles the information submitted through this site: what is collected, why, where it is stored, and the choices you have.",
+  description: DESCRIPTION,
 });
 
 const UPDATED = "September 2, 2026";
@@ -15,6 +18,13 @@ const UPDATED = "September 2, 2026";
 export default function PrivacyPage() {
   return (
     <LegalShell title="Privacy Policy" updated={UPDATED}>
+      <JsonLd
+        data={pageJsonLd({
+          path: "/legal/privacy",
+          name: "Privacy Policy",
+          description: DESCRIPTION,
+        })}
+      />
       <LegalSection heading="Who we are">
         <p>
           Qasem Portal is a technology company registered in Dubai, United

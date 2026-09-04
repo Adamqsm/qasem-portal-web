@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, portfolioJsonLd } from "@/lib/seo";
 import { withUtm } from "@/lib/utm";
+import JsonLd from "@/components/JsonLd";
 import CueCard from "@/components/CueCard";
 
 export const metadata: Metadata = buildMetadata({
   path: "/portfolio",
   title: "Portfolio",
   description:
-    "The ventures within Qasem Portal. Today, Cue: a restaurant reservation and venue booking platform in Amman, Jordan.",
+    "The ventures of Qasem Portal. Cue, the first, is a restaurant reservation and venue booking app operating in Amman, Jordan.",
+  keywords: ["Qasem Portal ventures", "Cue venture", "Cue restaurant reservation app"],
 });
 
 export default function PortfolioPage() {
   return (
     <>
+      <JsonLd data={portfolioJsonLd()} />
+
       <section className="container-site pb-16 pt-20 sm:pb-20 sm:pt-28">
         <p className="eyebrow">The portfolio</p>
         <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">

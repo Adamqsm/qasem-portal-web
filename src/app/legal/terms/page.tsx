@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, pageJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import { LegalSection, LegalShell } from "@/components/LegalShell";
+
+const DESCRIPTION =
+  "The terms that govern use of the Qasem Portal website at qasem-portal.com.";
 
 export const metadata: Metadata = buildMetadata({
   path: "/legal/terms",
   title: "Terms of Use",
-  description:
-    "The terms that govern use of the Qasem Portal website at qasem-portal.com.",
+  description: DESCRIPTION,
 });
 
 const UPDATED = "September 2, 2026";
@@ -15,6 +18,13 @@ const UPDATED = "September 2, 2026";
 export default function TermsPage() {
   return (
     <LegalShell title="Terms of Use" updated={UPDATED}>
+      <JsonLd
+        data={pageJsonLd({
+          path: "/legal/terms",
+          name: "Terms of Use",
+          description: DESCRIPTION,
+        })}
+      />
       <LegalSection heading="Agreement">
         <p>
           These terms govern your use of the website at qasem-portal.com,

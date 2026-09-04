@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+/**
+ * Next already answers this route with a 404 status and its own `noindex`,
+ * which is what keeps it out of the index; a second robots tag here would
+ * only duplicate that. The title is the real gain: without it every missing
+ * URL shares the bare brand title with the homepage.
+ */
+export const metadata: Metadata = {
+  title: "Page not found",
+};
 
 export default function NotFound() {
   return (

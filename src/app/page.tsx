@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata, siteJsonLd } from "@/lib/seo";
-import { SITE_DESCRIPTION } from "@/lib/site";
 import { withUtm } from "@/lib/utm";
 import JsonLd from "@/components/JsonLd";
 import CueCard from "@/components/CueCard";
 
+/**
+ * The homepage title carries the brand first and then the company's own
+ * description of itself, because a brand nobody has met yet gives a search
+ * result nothing to match on and a reader nothing to read. Both halves are
+ * the hero sentence verbatim.
+ *
+ * The description names Cue on purpose. The likeliest route to this page is
+ * someone who met Cue first and wants to know what company stands behind it;
+ * a snippet that answers that question in the result earns the click.
+ */
 export const metadata: Metadata = buildMetadata({
   path: "",
-  title: "Qasem Portal",
-  description: SITE_DESCRIPTION,
+  title: "Qasem Portal · Technology company building modern applications",
+  absoluteTitle: true,
+  description:
+    "Qasem Portal builds and operates app-driven ventures for hospitality and adjacent sectors. Cue is its first venture. Registered in Dubai, United Arab Emirates.",
 });
 
 /**

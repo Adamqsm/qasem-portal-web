@@ -1,16 +1,30 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, pageJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import ContactForm from "@/components/ContactForm";
+
+const DESCRIPTION =
+  "Two paths to reach Qasem Portal: general inquiries about the company or its ventures, and careers. Both are read directly.";
 
 export const metadata: Metadata = buildMetadata({
   path: "/contact",
   title: "Contact",
-  description: "General inquiries and careers at Qasem Portal.",
+  description: DESCRIPTION,
+  keywords: ["contact Qasem Portal", "Qasem Portal careers"],
 });
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={pageJsonLd({
+          path: "/contact",
+          name: "Contact",
+          description: DESCRIPTION,
+          type: "ContactPage",
+        })}
+      />
+
       <section className="container-site pb-14 pt-20 sm:pb-16 sm:pt-28">
         <p className="eyebrow">Contact</p>
         <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
