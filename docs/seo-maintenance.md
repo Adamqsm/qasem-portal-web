@@ -143,6 +143,22 @@ Until one of those happens, adding geo markup here would target searches
 nobody runs, and would risk anchoring the company entity to a locality in a
 way that narrows rather than widens who finds it.
 
+## One-time, still owed
+
+Two steps need a signed-in browser and were not completed in the audit pass
+because the machine's Chrome went offline. Neither is urgent, and neither is
+a code change.
+
+- **Request Indexing** on all five URLs, through Search Console's URL
+  Inspection tool. On a two-day-old domain with zero inbound links this is
+  the fastest legitimate way to get first crawl, and it only has to be done
+  once. Tick them off in the run log when done.
+- **Rich Results Test** on `/` and `/portfolio`, per monthly step 7. The
+  graph has been validated structurally (every `@id` reference resolves, no
+  type conflicts, Cue's node consistent across both pages, Organization
+  carries Google's required name/url/logo), but Google's own parser has not
+  seen it yet.
+
 ## Automation note
 
 The monthly check needs Search Console, which means the session must reach
