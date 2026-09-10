@@ -140,6 +140,7 @@ describe("POST /api/contact", () => {
     expect(fake.stored).toHaveLength(1);
     const { collection, doc } = fake.stored[0];
     expect(collection).toBe("contactSubmissions");
+    expect(doc.inquiryType).toBe("general");
     expect(doc.name).toBe("Adam Qasem");
     expect(doc.email).toBe("sender@example.com");
     expect(doc.utm).toEqual({ utm_source: "linkedin" });
@@ -161,6 +162,7 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     const { collection, doc } = fake.stored[0];
     expect(collection).toBe("careerSubmissions");
+    expect(doc.inquiryType).toBe("careers");
     expect(doc.link).toBe("https://www.linkedin.com/in/someone");
     expect(mocks.sendSubmissionEmail).toHaveBeenCalledWith(
       expect.objectContaining({ kind: "careers" })
@@ -183,6 +185,17 @@ describe("POST /api/contact", () => {
       .map((c: unknown[]) => c.join(" "))
       .join("\n");
     expect(logged).toContain("s***@example.com");
+    expect(logged).not.toContain("sender@example.com");
+  });
+
+  it("keeps the success log masked for both inquiry types", async () => {
+    await post(VALID);
+    await post({ ...VALID, kind: "careers" });
+    const logged = (console.log as ReturnType<typeof vi.fn>).mock.calls
+      .map((c: unknown[]) => c.join(" "))
+      .join("\n");
+    expect(logged).toContain("stored general submission from s***@example.com");
+    expect(logged).toContain("stored careers submission from s***@example.com");
     expect(logged).not.toContain("sender@example.com");
   });
 

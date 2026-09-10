@@ -23,11 +23,23 @@ was hit for real on Cue; none of them are hypothetical.
 | `IP_HASH_SALT` | `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` | Production + Preview |
 | `RESEND_API_KEY` | from step 5 | Production |
 | `CONTACT_INBOX` | `adam@qasem-portal.com` (or preferred inbox) | Production |
+| `CAREERS_INBOX` | `careers@qasem-portal.com` | Production |
 | `MAIL_FROM` | `Qasem Portal <notifications@qasem-portal.com>` | Production |
 
 BOM WARNING (Cue lost partner leads to this): paste every value through a
 plain text editor first. After saving, if anything misbehaves, suspect an
-invisible leading BOM character before anything else.
+invisible leading BOM character before anything else. This applies to
+`CAREERS_INBOX` as much as any secret: a BOM in an address can make Resend
+reject the send, and because email is best-effort the only symptom is
+`(email: failed)` in the function log while the submission still stores.
+
+Inbox routing: careers submissions notify `CAREERS_INBOX`, general
+inquiries notify `CONTACT_INBOX`. Subjects are prefixed `[Careers]` or
+`[Contact]` so either inbox can filter on them, and reply-to is always the
+submitter. `careers@qasem-portal.com` must exist as a Workspace user, group
+or alias before this is set (cue-app.net also sends candidates there by
+`mailto:`). If `CAREERS_INBOX` is unset, careers mail falls back to
+`CONTACT_INBOX`.
 
 Missing-value behavior is fail-closed by design: without the Turnstile
 secret, the service account, or the salt, `/api/contact` returns 503 and
@@ -142,7 +154,9 @@ submissions still store without it, only the courtesy email is skipped.
       Turnstile `vercel.app` hostname) and once on production. Each lands
       in Firestore (`contactSubmissions`) AND in the inbox, with reply-to
       set to the sender.
-- [ ] Careers form once on production (`careerSubmissions`).
+- [ ] Careers form once on production (`careerSubmissions`, doc has
+      `inquiryType: "careers"`). The email arrives at `CAREERS_INBOX`, not
+      `CONTACT_INBOX`, with a `[Careers]` subject and reply-to the applicant.
 - [ ] Check the notification email lands in Inbox, not Spam; open the raw
       headers and confirm SPF=pass, DKIM=pass, DMARC=pass.
 - [ ] Firestore console: submission docs show `ipHash`, never an address.
