@@ -1,5 +1,5 @@
 import { maskEmail } from "@/lib/log-redact";
-import type { SubmissionData } from "@/lib/validation";
+import type { SubmissionData, SubmissionKind } from "@/lib/validation";
 
 /**
  * Notification email on each stored submission, via Resend's REST API
@@ -11,7 +11,12 @@ import type { SubmissionData } from "@/lib/validation";
  *   domain config — see docs/DEPLOY.md),
  * - plain transactional subject, no offer/trigger vocabulary,
  * - from address on the verified qasem-portal.com domain, reply-to set to
- *   the submitter so a reply goes straight back to them.
+ *   the submitter so a reply goes straight back to them,
+ * - destination chosen by inquiry type: careers submissions go to
+ *   CAREERS_INBOX (careers@qasem-portal.com, the one address candidates from
+ *   both qasem-portal.com and cue-app.net reach), everything else to
+ *   CONTACT_INBOX. The subject carries a "[Careers]" / "[Contact]" prefix so
+ *   a shared or forwarded inbox can filter on it.
  *
  * Email is a courtesy copy: Firestore is the source of truth. A missing key
  * or a failed send never fails the submission; the outcome is logged
@@ -25,19 +30,30 @@ const DEFAULT_FROM = "Qasem Portal <notifications@qasem-portal.com>";
 
 export type EmailOutcome = "sent" | "skipped" | "failed";
 
+/**
+ * Where a submission's notification goes. An unset CAREERS_INBOX falls back
+ * to the general inbox rather than to a hard-coded address, so deploying
+ * before the env var exists changes nothing and loses nothing.
+ */
+export function inboxFor(kind: SubmissionKind): string {
+  const contactInbox = process.env.CONTACT_INBOX || DEFAULT_INBOX;
+  if (kind === "careers") return process.env.CAREERS_INBOX || contactInbox;
+  return contactInbox;
+}
+
 export async function sendSubmissionEmail(
   data: SubmissionData
 ): Promise<EmailOutcome> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return "skipped";
 
-  const to = process.env.CONTACT_INBOX || DEFAULT_INBOX;
+  const to = inboxFor(data.kind);
   const from = process.env.MAIL_FROM || DEFAULT_FROM;
 
   const isCareers = data.kind === "careers";
   const subject = isCareers
-    ? "New careers introduction via qasem-portal.com"
-    : "New general inquiry via qasem-portal.com";
+    ? "[Careers] New careers introduction via qasem-portal.com"
+    : "[Contact] New general inquiry via qasem-portal.com";
 
   const lines = [
     isCareers

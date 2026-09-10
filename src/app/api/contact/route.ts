@@ -22,7 +22,9 @@ export const runtime = "nodejs";
  * writes do not exist in this app — Cue lost real leads to that pattern.
  *
  * Storage is the source of truth; the notification email is best-effort and
- * its failure never fails the submission. Logs carry masked identifiers only.
+ * its failure never fails the submission. The inquiry type picks both the
+ * collection and the notification inbox (CAREERS_INBOX for careers,
+ * CONTACT_INBOX otherwise; see lib/email). Logs carry masked identifiers only.
  */
 
 const RATE_LIMIT_COLLECTION = "contactRateLimits";
@@ -100,6 +102,10 @@ export async function POST(request: Request) {
     const collection =
       data.kind === "careers" ? "careerSubmissions" : "contactSubmissions";
     await db.collection(collection).add({
+      // Redundant with the collection name on purpose: it keeps a doc
+      // self-describing once exported or merged with the other collection,
+      // and it names the same type that picked the notification inbox.
+      inquiryType: data.kind,
       name: data.name,
       email: data.email,
       message: data.message,
