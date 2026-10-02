@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NAV_ITEMS } from "@/lib/site";
+import { COMPANY, NAV_ITEMS } from "@/lib/site";
 import { Monogram, Wordmark } from "@/components/BrandWordmark";
 
 const LEGAL_ITEMS = [
@@ -58,10 +58,14 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className="flex items-center justify-between border-t border-line py-6">
-          <p className="text-[0.8125rem] text-faint">
-            © {year} Qasem Portal. All rights reserved.
-          </p>
+        <div className="flex items-center justify-between gap-6 border-t border-line py-6">
+          <div className="text-[0.8125rem] text-faint">
+            <p>© {year} Qasem Portal. All rights reserved.</p>
+            <p className="mt-1">
+              {COMPANY.legalName}, {COMPANY.legalType}. Trade licence no.{" "}
+              {COMPANY.licenceNo}, {COMPANY.licenceAuthority}.
+            </p>
+          </div>
           <Monogram sizePx={32} decorative />
         </div>
       </div>

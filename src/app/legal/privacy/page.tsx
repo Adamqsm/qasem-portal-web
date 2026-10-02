@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata, pageJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import { COMPANY } from "@/lib/site";
 import { LegalSection, LegalShell } from "@/components/LegalShell";
 
 const DESCRIPTION =
@@ -13,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
   description: DESCRIPTION,
 });
 
-const UPDATED = "September 2, 2026";
+const UPDATED = "October 2, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -31,6 +32,11 @@ export default function PrivacyPage() {
           Arab Emirates, and Cue is its first venture. This policy covers
           the website at qasem-portal.com. Cue&apos;s own products and
           websites have their own policies, published by Cue.
+        </p>
+        <p>
+          Qasem Portal is the trading name of {COMPANY.legalName}, trade
+          licence no. {COMPANY.licenceNo} ({COMPANY.licenceAuthority}).
+          Registered address: {COMPANY.address}.
         </p>
       </LegalSection>
 
