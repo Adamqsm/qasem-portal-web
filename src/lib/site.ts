@@ -4,6 +4,15 @@ export const SITE_URL =
 
 export const SITE_NAME = "Qasem Portal";
 
+/** Official company details, as stated on the trade licence. */
+export const COMPANY = {
+  legalName: "ADAM QASEM PORTAL L.L.C",
+  legalType: "Limited Liability Company, Single Owner",
+  licenceNo: "1651775",
+  licenceAuthority: "Dubai Department of Economy and Tourism",
+  address: "Office 403-40B, Al Qusais Industrial 3, Deira, Dubai, United Arab Emirates",
+} as const;
+
 /** One sentence, reused as the default meta description and JSON-LD text. */
 export const SITE_DESCRIPTION =
   "Qasem Portal is a technology company building modern applications for hospitality and adjacent sectors. Registered in Dubai, United Arab Emirates.";
@@ -93,6 +102,6 @@ export const PAGES = [
   { path: "/portfolio", label: "Portfolio", lastModified: "2026-09-04", changeFrequency: "monthly" },
   { path: "/careers", label: "Career Growth and Learning", lastModified: "2026-09-04", changeFrequency: "yearly" },
   { path: "/contact", label: "Contact", lastModified: "2026-09-04", changeFrequency: "yearly" },
-  { path: "/legal/privacy", label: "Privacy Policy", lastModified: "2026-09-02", changeFrequency: "yearly" },
-  { path: "/legal/terms", label: "Terms of Use", lastModified: "2026-09-02", changeFrequency: "yearly" },
+  { path: "/legal/privacy", label: "Privacy Policy", lastModified: "2026-10-02", changeFrequency: "yearly" },
+  { path: "/legal/terms", label: "Terms of Use", lastModified: "2026-10-02", changeFrequency: "yearly" },
 ] as const;
