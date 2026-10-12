@@ -1,0 +1,7 @@
+# qasem-portal-web
+
+## Permanent design rules
+
+NEVER add an eyebrow pill/badge/chip above a hero or section headline (e.g. 'Launching soon · Amman'). It reads as AI-generated. This rule is permanent and has the same standing as: never use em dashes or en dashes mid-sentence.
+
+Enforcement: `node scripts/copy-guard.mjs`, run from the repo root and configured by `copy-guard.config.json`. It fails on the pill phrases and the pill component and class names, in English and Arabic, anywhere in tracked source or locale files (comments included; JSX is also read as rendered text, so a phrase wrapped over two lines or joined by `{" "}` or `&nbsp;` is caught), and on em or en dashes in user-facing copy: string literals, JSX text and JSX attribute values in the TS and JS files under `src/` (in JSX the `&mdash;` and `&ndash;` entities count as dashes too), text and attribute values in the SVG and HTML files under `public/` (dash references count there too), and text, web manifest, XML and JSON files under `public/`. CSS `content` strings (for example in `src/app/globals.css`) are not checked, so never put copy in CSS. It runs in the copy-guard GitHub Action (`.github/workflows/copy-guard.yml`, every push and pull request) and in the husky pre-commit hook (`.husky/pre-commit`). This CLAUDE.md is the only allowlisted file; `docs/` and root-level Markdown are not scanned. When the guard fails, fix the copy, the identifier or the comment instead of adding an exclude.

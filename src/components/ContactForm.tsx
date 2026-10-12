@@ -140,7 +140,7 @@ export default function ContactForm({ kind }: { kind: Kind }) {
         className="border-2 border-ink p-[5px] outline-none"
       >
         <div className="border border-ink p-7">
-          <p className="eyebrow">Message sent</p>
+          <p className="caps-label">Message sent</p>
           <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink">
             {copy.success}
           </p>

@@ -24,14 +24,13 @@ export const metadata: Metadata = buildMetadata({
 });
 
 /**
- * The homepage is one grid, stated once and repeated: a fixed label column
- * on the left (the double rule and a tracked-caps eyebrow) and a content
- * column on the right, identical in every section, hero included, so the
- * section labels and the content edge sit on one vertical axis down the
- * page. Sections share one vertical rhythm and are separated by a single
- * hairline; the contact strip alone opens with the full-width double rule.
- * Typography carries the hierarchy. There is no imagery outside the Cue
- * card.
+ * The homepage is a single column: every section opens with its heading on
+ * the container's left edge, so headings and content share one vertical
+ * axis down the page. In the hero the short double rule sits under the
+ * headline, as it does on the 404 and legal pages. Sections share one
+ * vertical rhythm and are separated by a single hairline; the contact strip
+ * alone opens with the full-width double rule. Typography carries the
+ * hierarchy. There is no imagery outside the Cue card.
  *
  * Copy discipline: every sentence traces to a stated fact. The company is
  * described by what it builds and operates; Cue is its first venture, not
@@ -52,100 +51,76 @@ const DIRECTION_ROWS = [
   },
 ] as const;
 
-/**
- * The shared section grid. Below md the label stacks above the content;
- * md gets an 11rem label so a 768px viewport keeps a readable content
- * column; lg and up carries the full 15rem label with the wide gutter.
- */
-const GRID =
-  "grid gap-10 md:grid-cols-[minmax(0,11rem)_1fr] md:gap-12 lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-20";
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div>
-      <div className="rule-double w-16 text-ink" aria-hidden="true" />
-      <p className="eyebrow mt-5">{children}</p>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <>
       <JsonLd data={siteJsonLd()} />
 
-      {/* Hero: a typographic opening statement on the shared grid. */}
-      <section aria-labelledby="hero-heading" className="container-site">
-        <div className={`${GRID} pb-20 pt-20 sm:pb-28 sm:pt-32`}>
-          <div className="anim-rise-1">
-            <div className="anim-draw rule-double w-16 text-ink" aria-hidden="true" />
-            <p className="eyebrow mt-5">Dubai, United Arab Emirates</p>
-          </div>
-          <div>
-            <h1
-              id="hero-heading"
-              className="anim-rise-2 max-w-4xl text-[clamp(2.25rem,4.5vw,3rem)] leading-[1.1] tracking-[-0.01em]"
-            >
-              A technology company building modern applications for
-              hospitality and adjacent sectors.
-            </h1>
-            <p className="anim-rise-3 mt-8 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
-              Qasem Portal builds and operates app-driven ventures, with an
-              initial focus on the hospitality sector. The company is
-              structured to house multiple ventures. Cue, the first, is the
-              only one in operation today.
-            </p>
-            <div className="anim-rise-3 mt-10">
-              <Link href="/portfolio" className="btn btn-primary">
-                View the portfolio
-              </Link>
-            </div>
-          </div>
+      {/* Hero: a typographic opening statement. */}
+      <section
+        aria-labelledby="hero-heading"
+        className="container-site pb-20 pt-20 sm:pb-28 sm:pt-32"
+      >
+        <h1
+          id="hero-heading"
+          className="anim-rise-1 max-w-4xl text-[clamp(2.25rem,4.5vw,3rem)] leading-[1.1] tracking-[-0.01em]"
+        >
+          A technology company building modern applications for hospitality
+          and adjacent sectors.
+        </h1>
+        <div
+          className="anim-draw rule-double mt-8 w-36 text-ink"
+          aria-hidden="true"
+        />
+        <p className="anim-rise-2 mt-8 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
+          Qasem Portal builds and operates app-driven ventures, with an initial
+          focus on the hospitality sector. The company is structured to house
+          multiple ventures. Cue, the first, is the only one in operation
+          today.
+        </p>
+        <div className="anim-rise-2 mt-10">
+          <Link href="/portfolio" className="btn btn-primary">
+            View the portfolio
+          </Link>
         </div>
       </section>
 
       {/* Vision and goals: the direction, as a register. */}
       <section aria-labelledby="direction-heading" className="container-site">
-        <div className={`${GRID} border-t border-line py-20 sm:py-28`}>
-          <SectionLabel>Vision and goals</SectionLabel>
-          <div>
-            <h2 id="direction-heading" className="text-2xl sm:text-[2rem]">
-              What Qasem Portal sets out to do.
-            </h2>
-            <div className="mt-10 border-b border-line">
-              {DIRECTION_ROWS.map((row) => (
-                <div
-                  key={row.term}
-                  className="grid gap-3 border-t border-line py-7 lg:grid-cols-[11rem_1fr] lg:gap-8"
-                >
-                  <h3 className="font-serif text-xl">{row.term}</h3>
-                  <p className="max-w-measure text-base leading-relaxed text-muted">
-                    {row.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
+        <div className="border-t border-line py-20 sm:py-28">
+          <h2 id="direction-heading" className="text-2xl sm:text-[2rem]">
+            What Qasem Portal sets out to do.
+          </h2>
+          <div className="mt-10">
+            {DIRECTION_ROWS.map((row) => (
+              <div
+                key={row.term}
+                className="grid gap-3 border-t border-line py-7 lg:grid-cols-[11rem_1fr] lg:gap-8"
+              >
+                <h3 className="font-serif text-xl">{row.term}</h3>
+                <p className="max-w-measure text-base leading-relaxed text-muted">
+                  {row.detail}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Portfolio: one entry today; the register extends as ventures are added. */}
       <section aria-labelledby="portfolio-heading" className="container-site">
-        <div className={`${GRID} border-t border-line py-20 sm:py-28`}>
-          <SectionLabel>Portfolio</SectionLabel>
-          <div>
-            <h2 id="portfolio-heading" className="text-2xl sm:text-[2rem]">
-              One venture today.
-            </h2>
-            <p className="mt-6 max-w-measure text-base leading-relaxed text-muted">
-              Cue is our first venture.
-            </p>
-            <ul className="mt-10 grid max-w-3xl gap-10">
-              <li>
-                <CueCard headingLevel="h3" />
-              </li>
-            </ul>
-          </div>
+        <div className="border-t border-line py-20 sm:py-28">
+          <h2 id="portfolio-heading" className="text-2xl sm:text-[2rem]">
+            One venture today.
+          </h2>
+          <p className="mt-6 max-w-measure text-base leading-relaxed text-muted">
+            Cue is our first venture.
+          </p>
+          <ul className="mt-10 grid max-w-3xl gap-10">
+            <li>
+              <CueCard headingLevel="h3" />
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -155,23 +130,17 @@ export default function Home() {
           centred between its rule and the footer's. */}
       <section aria-labelledby="contact-heading" className="container-site pt-8">
         <div className="rule-double text-ink" aria-hidden="true" />
-        <div className={`${GRID} pt-24 sm:pt-32`}>
-          {/* The full-width rule above stands in for the label's short rule. */}
-          <div>
-            <p className="eyebrow">Contact</p>
-          </div>
-          <div className="items-end justify-between gap-10 md:flex">
-            <h2 id="contact-heading" className="max-w-xl text-2xl sm:text-[2rem]">
-              General questions and careers both start in the same place.
-            </h2>
-            <div className="mt-8 shrink-0 md:mt-0">
-              <Link
-                href={withUtm("/contact", "home-contact-strip")}
-                className="btn btn-primary"
-              >
-                Contact
-              </Link>
-            </div>
+        <div className="items-end justify-between gap-10 pt-24 sm:pt-32 md:flex">
+          <h2 id="contact-heading" className="max-w-xl text-2xl sm:text-[2rem]">
+            General questions and careers both start in the same place.
+          </h2>
+          <div className="mt-8 shrink-0 md:mt-0">
+            <Link
+              href={withUtm("/contact", "home-contact-strip")}
+              className="btn btn-primary"
+            >
+              Contact
+            </Link>
           </div>
         </div>
       </section>

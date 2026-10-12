@@ -23,7 +23,7 @@ export default function Footer() {
             </p>
           </div>
           <nav aria-label="Site">
-            <h2 className="eyebrow">Site</h2>
+            <h2 className="caps-label">Site</h2>
             <ul className="mt-4 space-y-3">
               <li>
                 <Link href="/" className="link no-underline hover:underline">
@@ -43,7 +43,7 @@ export default function Footer() {
             </ul>
           </nav>
           <nav aria-label="Legal">
-            <h2 className="eyebrow">Legal</h2>
+            <h2 className="caps-label">Legal</h2>
             <ul className="mt-4 space-y-3">
               {LEGAL_ITEMS.map((item) => (
                 <li key={item.href}>

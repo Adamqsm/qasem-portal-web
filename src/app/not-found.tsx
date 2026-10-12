@@ -14,8 +14,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section className="container-site pb-24 pt-24 sm:pt-36">
-      <p className="eyebrow">Error 404</p>
-      <h1 className="mt-6 text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06]">
+      <h1 className="text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06]">
         Page not found.
       </h1>
       <div className="rule-double mt-8 w-36 text-ink" aria-hidden="true" />

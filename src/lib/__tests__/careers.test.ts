@@ -15,7 +15,7 @@ const READING_COPY = [
   CAREERS_TITLE,
   CAREERS_SUBHEAD,
   CAREERS_DESCRIPTION,
-  ...COMMITMENTS.flatMap((part) => [part.label, part.heading, part.body]),
+  ...COMMITMENTS.flatMap((part) => [part.heading, part.body]),
   CAREERS_CLOSING,
 ];
 

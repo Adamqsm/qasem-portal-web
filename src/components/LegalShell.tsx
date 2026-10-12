@@ -14,8 +14,7 @@ export function LegalShell({
 }) {
   return (
     <section className="container-site pb-16 pt-20 sm:pt-28">
-      <p className="eyebrow">Legal</p>
-      <h1 className="mt-6 text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.06]">
+      <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.06]">
         {title}
       </h1>
       <p className="mt-5 text-[0.9375rem] text-faint">Last updated {updated}.</p>

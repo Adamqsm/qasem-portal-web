@@ -28,21 +28,18 @@ export const CAREERS_DESCRIPTION =
 export const COMMITMENTS = [
   {
     id: "professional-development",
-    label: "Part one",
     heading: "Professional development.",
     body:
       "Every member of the Qasem Portal team is granted access to a curated library of professional courses delivered through Coursera, selected to align with their specific discipline and career trajectory. Course selection is reviewed periodically to ensure continued relevance to each employee's evolving responsibilities.",
   },
   {
     id: "mentorship",
-    label: "Part two",
     heading: "Mentorship.",
     body:
       "Each employee is paired with a mentor within the organization, providing structured guidance, regular feedback, and a direct channel for professional counsel throughout their tenure.",
   },
   {
     id: "applied-experience",
-    label: "Part three",
     heading: "Applied experience.",
     body:
       "Beyond formal instruction, employees are given the opportunity to apply new knowledge directly to live projects and ventures within Qasem Portal, ensuring that learning translates into demonstrable, hands-on capability.",

@@ -81,9 +81,12 @@
     @apply mx-auto w-full max-w-site px-6 sm:px-10;
   }
 
-  /* Tracked-caps label — echoes the letterspaced QASEM PORTAL line in the
-     brand's own signature block. */
-  .eyebrow {
+  /* Tracked-caps label, echoing the letterspaced QASEM PORTAL line in the
+     brand's own signature block. Used only where the label is itself a
+     heading, a term or a status title: the footer column headings, the
+     Cue card's register terms and the contact form's confirmation title.
+     Never as a decorative line above a headline. */
+  .caps-label {
     @apply font-sans text-xs font-semibold uppercase tracking-label text-muted;
   }
 
@@ -179,9 +182,6 @@
   .anim-rise-2 {
     animation: qp-rise 0.55s 0.12s cubic-bezier(0.2, 0.6, 0.2, 1) both;
   }
-  .anim-rise-3 {
-    animation: qp-rise 0.55s 0.24s cubic-bezier(0.2, 0.6, 0.2, 1) both;
-  }
   .anim-draw {
     transform-origin: left;
     animation: qp-draw 0.7s 0.34s cubic-bezier(0.2, 0.6, 0.2, 1) both;
@@ -189,7 +189,6 @@
   @media (prefers-reduced-motion: reduce) {
     .anim-rise-1,
     .anim-rise-2,
-    .anim-rise-3,
     .anim-draw {
       animation: none;
     }
