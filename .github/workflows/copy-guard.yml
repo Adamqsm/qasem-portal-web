@@ -1,0 +1,48 @@
+# copy-guard: blocks the headline pill pattern and en/em dashes in user-facing copy.
+# Canonical template. Copy to .github/workflows/copy-guard.yml unchanged; the
+# guard lives at scripts/copy-guard.mjs and reads copy-guard.config.json.
+name: copy-guard
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+concurrency:
+  group: copy-guard-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  copy-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Installs only the TypeScript compiler, at the version package-lock.json
+      # pins, and only when the config declares a "ts" copy surface. It goes to
+      # $RUNNER_TEMP so the repo's own dependencies are never installed.
+      - name: Install TypeScript for the guard
+        run: |
+          if node -e "process.exit(require('./copy-guard.config.json').copySurfaces.some((s) => s.kind === 'ts') ? 0 : 1)"; then
+            version=$(node -p "const l = require('./package-lock.json'); (l.packages?.['node_modules/typescript'] ?? l.dependencies?.typescript ?? {}).version ?? ''")
+            if [ -z "$version" ]; then
+              echo "::error::copy-guard needs typescript locked in package-lock.json"
+              exit 1
+            fi
+            npm install --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/guard" "typescript@$version"
+          else
+            echo "No ts copy surface configured; TypeScript not needed."
+          fi
+
+      - name: Run copy-guard
+        env:
+          GUARD_TS_DIR: ${{ runner.temp }}/guard/node_modules/typescript
+        run: node scripts/copy-guard.mjs

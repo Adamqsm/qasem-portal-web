@@ -24,17 +24,14 @@ export const metadata: Metadata = buildMetadata({
 });
 
 /**
- * The page is a register of three parts on the site's shared grid: the label
- * column carries the short double rule and a tracked-caps part number, the
- * content column carries the heading and the commitment itself. The parts are
- * separated by the hairline the homepage uses between its sections, and the
- * one full-width double rule is kept for the closing contact strip, as on the
- * portfolio page. No imagery, no icon, no accent: the type carries it.
+ * The page is a register of three parts in the site's single column: each
+ * part opens with its heading, followed by the commitment itself. The parts
+ * are separated by the hairline the homepage uses between its sections, and
+ * the one full-width double rule is kept for the closing contact strip, as on
+ * the portfolio page. No imagery, no icon, no accent: the type carries it.
  *
  * The copy lives in src/lib/careers.ts, where a test pins its substance.
  */
-const GRID =
-  "grid gap-10 md:grid-cols-[minmax(0,11rem)_1fr] md:gap-12 lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-20";
 
 export default function CareersPage() {
   return (
@@ -48,8 +45,7 @@ export default function CareersPage() {
       />
 
       <section className="container-site pb-14 pt-20 sm:pb-16 sm:pt-28">
-        <p className="eyebrow">Careers</p>
-        <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
+        <h1 className="max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
           {CAREERS_TITLE}
         </h1>
         <p className="mt-8 max-w-measure font-serif text-xl leading-[1.65] text-muted">
@@ -64,33 +60,25 @@ export default function CareersPage() {
           aria-labelledby={`${part.id}-heading`}
           className="container-site scroll-mt-24"
         >
-          <div className={`${GRID} border-t border-line py-14 sm:py-16`}>
-            <div>
-              <div className="rule-double w-16 text-ink" aria-hidden="true" />
-              <p className="eyebrow mt-5">{part.label}</p>
-            </div>
-            <div className="max-w-2xl">
-              <h2 id={`${part.id}-heading`} className="text-3xl sm:text-4xl">
-                {part.heading}
-              </h2>
-              <p className="mt-6 max-w-measure text-base leading-relaxed text-muted">
-                {part.body}
-              </p>
-            </div>
+          <div className="border-t border-line py-14 sm:py-16">
+            <h2
+              id={`${part.id}-heading`}
+              className="max-w-2xl text-3xl sm:text-4xl"
+            >
+              {part.heading}
+            </h2>
+            <p className="mt-6 max-w-measure text-base leading-relaxed text-muted">
+              {part.body}
+            </p>
           </div>
         </section>
       ))}
 
       {/* The closing line: a statement, not a heading, set in the display
-          face at reading weight so it reads as the page's last word. */}
-      <section aria-labelledby="principle-label" className="container-site">
-        <div className={`${GRID} border-t border-line py-14 sm:py-16`}>
-          <div>
-            <div className="rule-double w-16 text-ink" aria-hidden="true" />
-            <p id="principle-label" className="eyebrow mt-5">
-              The principle
-            </p>
-          </div>
+          face at reading weight so it reads as the page's last word. The
+          region is named for assistive technology only. */}
+      <section aria-label="The principle" className="container-site">
+        <div className="border-t border-line py-14 sm:py-16">
           <p className="max-w-2xl font-serif text-2xl leading-[1.4] text-ink sm:text-[1.75rem]">
             {CAREERS_CLOSING}
           </p>

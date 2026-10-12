@@ -1,0 +1,11 @@
+{
+  "$comment": "copy-guard spec v2, qasem-portal-web (Next.js, English only). All user-facing copy lives in src as TS/TSX (pages, components, src/lib data, metadata, JSON-LD, OG cards, email text); .js/.jsx/.mjs are included because tsconfig allows JS. public/ holds SVG brand marks plus raster images today; the SVGs are scanned as markup, and the text and JSON surfaces make sure an llms.txt, web manifest or similar file added later is checked too (until then they print a harmless 'matches no tracked file' warning).",
+  "pillExclude": [],
+  "copySurfaces": [
+    { "glob": "src/**/*.{ts,tsx,js,jsx,mjs}", "kind": "ts" },
+    { "glob": "public/**/*.{svg,html}", "kind": "html" },
+    { "glob": "public/**/*.{txt,webmanifest,xml}", "kind": "text" },
+    { "glob": "public/**/*.json", "kind": "json" }
+  ],
+  "copyExclude": []
+}

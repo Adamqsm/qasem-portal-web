@@ -19,8 +19,7 @@ export default function PortfolioPage() {
       <JsonLd data={portfolioJsonLd()} />
 
       <section className="container-site pb-16 pt-20 sm:pb-20 sm:pt-28">
-        <p className="eyebrow">The portfolio</p>
-        <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
+        <h1 className="max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
           Qasem Portal&apos;s ventures.
         </h1>
         <p className="mt-8 max-w-measure font-serif text-xl leading-[1.65] text-muted">

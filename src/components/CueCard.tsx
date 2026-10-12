@@ -92,17 +92,14 @@ export default function CueCard({ headingLevel = "h2" }: Props) {
       {/* Double-rule frame: thick outer, thin inner, like the monogram. */}
       <div className="border-2 border-current p-[5px]">
         <div className="border border-current p-6 sm:p-10">
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-            <div className="flex items-center gap-3.5">
-              <CueMark className="h-9 w-9 text-cue" />
-              <Heading
-                id="cue-card-title"
-                className="font-cue text-3xl font-bold tracking-tight text-cue"
-              >
-                Cue
-              </Heading>
-            </div>
-            <p className="eyebrow">First venture</p>
+          <div className="flex items-center gap-3.5">
+            <CueMark className="h-9 w-9 text-cue" />
+            <Heading
+              id="cue-card-title"
+              className="font-cue text-3xl font-bold tracking-tight text-cue"
+            >
+              Cue
+            </Heading>
           </div>
 
           <p className="mt-6 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
@@ -143,7 +140,7 @@ export default function CueCard({ headingLevel = "h2" }: Props) {
                 key={row.term}
                 className="grid gap-1 border-b border-line py-3.5 sm:grid-cols-[9rem_1fr] sm:gap-4"
               >
-                <dt className="eyebrow self-center">{row.term}</dt>
+                <dt className="caps-label self-center">{row.term}</dt>
                 <dd className="text-[0.9375rem] text-ink">{row.detail}</dd>
               </div>
             ))}

@@ -27,8 +27,7 @@ export default function ContactPage() {
       />
 
       <section className="container-site pb-14 pt-20 sm:pb-16 sm:pt-28">
-        <p className="eyebrow">Contact</p>
-        <h1 className="mt-6 max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
+        <h1 className="max-w-3xl text-[clamp(2.375rem,5.5vw,3.75rem)] leading-[1.06] tracking-[-0.01em]">
           Reach the company.
         </h1>
         <p className="mt-8 max-w-measure font-serif text-xl leading-[1.65] text-muted">
@@ -50,22 +49,17 @@ export default function ContactPage() {
         aria-labelledby="general-heading"
         className="container-site scroll-mt-24 py-14 sm:py-16"
       >
-        <div className="grid gap-10 sm:grid-cols-[minmax(0,15rem)_1fr] sm:gap-20">
-          <div>
-            <div className="rule-double w-16 text-ink" aria-hidden="true" />
-            <p className="eyebrow mt-5">Path one</p>
-          </div>
-          <div className="max-w-2xl">
-            <h2 id="general-heading" className="text-3xl sm:text-4xl">
-              General inquiries.
-            </h2>
-            <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
-              Questions about Qasem Portal, a venture, or a matter you would
-              like to raise with the company.
-            </p>
-            <div className="mt-10">
-              <ContactForm kind="general" />
-            </div>
+        <div className="max-w-2xl">
+          <div className="rule-double w-16 text-ink" aria-hidden="true" />
+          <h2 id="general-heading" className="mt-6 text-3xl sm:text-4xl">
+            General inquiries.
+          </h2>
+          <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
+            Questions about Qasem Portal, a venture, or a matter you would
+            like to raise with the company.
+          </p>
+          <div className="mt-10">
+            <ContactForm kind="general" />
           </div>
         </div>
       </section>
@@ -75,32 +69,27 @@ export default function ContactPage() {
         aria-labelledby="careers-heading"
         className="container-site scroll-mt-24 py-14 sm:py-16"
       >
-        <div className="grid gap-10 sm:grid-cols-[minmax(0,15rem)_1fr] sm:gap-20">
-          <div>
-            <div className="rule-double w-16 text-ink" aria-hidden="true" />
-            <p className="eyebrow mt-5">Path two</p>
-          </div>
-          <div className="max-w-2xl">
-            <h2 id="careers-heading" className="text-3xl sm:text-4xl">
-              Careers.
-            </h2>
-            <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
-              There are no open roles posted today. Capable people are still
-              worth hearing from: introduce yourself, and if there is a fit at
-              Qasem Portal or one of its ventures, now or later, you will hear
-              back.
-            </p>
-            <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
-              What the company commits to the people it employs is set out
-              on the{" "}
-              <Link href="/careers" className="link">
-                Career Growth and Learning
-              </Link>{" "}
-              page.
-            </p>
-            <div className="mt-10">
-              <ContactForm kind="careers" />
-            </div>
+        <div className="max-w-2xl">
+          <div className="rule-double w-16 text-ink" aria-hidden="true" />
+          <h2 id="careers-heading" className="mt-6 text-3xl sm:text-4xl">
+            Careers.
+          </h2>
+          <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
+            There are no open roles posted today. Capable people are still
+            worth hearing from: introduce yourself, and if there is a fit at
+            Qasem Portal or one of its ventures, now or later, you will hear
+            back.
+          </p>
+          <p className="mt-4 max-w-measure text-[0.9375rem] leading-relaxed text-muted">
+            What the company commits to the people it employs is set out
+            on the{" "}
+            <Link href="/careers" className="link">
+              Career Growth and Learning
+            </Link>{" "}
+            page.
+          </p>
+          <div className="mt-10">
+            <ContactForm kind="careers" />
           </div>
         </div>
       </section>

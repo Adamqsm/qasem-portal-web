@@ -1,0 +1,2 @@
+# copy-guard (husky v9): blocks the headline pill pattern and en/em dashes in copy.
+node scripts/copy-guard.mjs
