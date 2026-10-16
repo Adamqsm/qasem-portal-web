@@ -13,7 +13,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "firebase-admin": "^13.10.0",
+    "firebase-admin": "^14.5.0",
     "next": "15.5.28",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
