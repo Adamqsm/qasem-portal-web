@@ -7,7 +7,7 @@ Cue is its first. This site is its professional front door.
 
 ## Stack
 
-- Next.js 14 (App Router, static prerender for every page) + TypeScript
+- Next.js 15 (App Router, static prerender for every page) + React 19 + TypeScript
 - Tailwind CSS, tokens in `tailwind.config.ts` + `src/app/globals.css`
 - Forms: server-side API route → Firebase Admin SDK → Firestore
   (no client-side Firebase SDK anywhere; Firestore rules are deny-all)
@@ -19,7 +19,7 @@ Cue is its first. This site is its professional front door.
 ## Commands
 
 ```
-npm install       # postinstall applies patches/ via patch-package
+npm install       # postinstall runs patch-package (applies patches/ when present)
 npm run dev
 npm run build
 npm run lint

@@ -8,7 +8,7 @@ was hit for real on Cue; none of them are hypothetical.
 
 1. Push this repo to GitHub (`Adamqsm/qasem-portal-web`, main = production).
 2. Vercel → Add New Project → import the repo. Framework preset: Next.js.
-   No custom build settings needed (`patch-package` runs via postinstall).
+   No custom build settings needed.
 3. Do not add env vars yet — do it in step 2 so the first real deploy has
    everything.
 
@@ -187,7 +187,10 @@ Run the Firestore emulator alongside: `firebase emulators:start --only
 firestore --project qasem-portal-demo`. With the emulator down the form
 API 503s (fail closed) — that is correct behavior, not a bug.
 
-Windows note: local prod builds work on Node 20 and Node 24 because
-`patches/next+14.2.35.patch` fixes `@vercel/og`'s file-URL resolution
-(applied automatically by postinstall). Without it, OG prerendering dies
-with `TypeError: Invalid URL` on Windows.
+OG image note: Next 14.2.35's bundled `@vercel/og` resolved its wasm and
+font files with `path.join` on a `file://` URL, so OG prerendering died with
+`TypeError: Invalid URL` on Node 24+ and on Windows. The repo carried
+`patches/next+14.2.35.patch` for that until the Next 15.5.28 upgrade. The
+`@vercel/og` 0.7.2 bundled with Next 15.5 already uses
+`new URL("./yoga.wasm", import.meta.url)`, so the patch was deleted.
+`patch-package` still runs on postinstall in case a patch is needed again.

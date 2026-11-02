@@ -7,7 +7,7 @@
  *   careers forms; X-Frame-Options below is the legacy twin.
  * - `form-action 'self'` stops an injected <form> from POSTing a submitter's
  *   name/email/message to an attacker-controlled origin.
- * - `script-src` keeps 'unsafe-inline' deliberately: Next 14's App Router
+ * - `script-src` keeps 'unsafe-inline' deliberately: Next's App Router
  *   emits per-request inline bootstrap scripts, and the JSON-LD blocks are
  *   inline too. The strict alternative is a per-request nonce, which opts
  *   every page out of static rendering — not a trade worth making for a
