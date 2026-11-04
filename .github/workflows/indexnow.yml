@@ -1,0 +1,36 @@
+# IndexNow: after each successful production deploy, tell Bing and the other
+# IndexNow engines to recrawl every URL in the live sitemap. Runs on the
+# deployment status Vercel reports back to GitHub; a manual run from the
+# Actions tab (or `npm run indexnow` locally) does the same thing.
+name: indexnow
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    # Vercel names its production environment "Production" (newer projects
+    # append the project name), so match on the prefix.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       startsWith(github.event.deployment.environment, 'Production'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Submit the sitemap to IndexNow
+        run: node scripts/indexnow.mjs

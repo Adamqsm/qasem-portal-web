@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { buildMetadata, portfolioJsonLd } from "@/lib/seo";
-import { withUtm } from "@/lib/utm";
 import JsonLd from "@/components/JsonLd";
 import CueCard from "@/components/CueCard";
 
 export const metadata: Metadata = buildMetadata({
   path: "/portfolio",
-  title: "Portfolio",
+  title: "Portfolio: Cue",
   description:
-    "The ventures of Qasem Portal. Cue, the first, is a restaurant reservation and venue booking app operating in Amman, Jordan.",
+    "Cue, the restaurant reservation and venue booking app from Amman, Jordan, is the venture Qasem Portal builds and operates.",
   keywords: ["Qasem Portal ventures", "Cue venture", "Cue restaurant reservation app"],
 });
 
@@ -28,34 +26,16 @@ export default function PortfolioPage() {
         </p>
       </section>
 
-      {/* The venture register: today a single entry. The list simply grows
-          as ventures are established; the layout does not change. */}
+      {/* The venture register: a single entry. Copy here implies no wider
+          portfolio (Adam, 4 Nov 2026): no "further ventures" note and no
+          call for submissions. Contact stays one click away in the nav,
+          the footer and the floating button. */}
       <section aria-label="Ventures" className="container-site">
         <ul className="grid max-w-3xl gap-10">
           <li>
             <CueCard />
           </li>
         </ul>
-        <p className="mt-10 max-w-measure text-[0.9375rem] leading-relaxed text-faint">
-          Further ventures will be listed here as they are established.
-        </p>
-      </section>
-
-      <section className="container-site pt-20 sm:pt-28">
-        <div className="rule-double text-ink" aria-hidden="true" />
-        <div className="items-end justify-between gap-10 py-14 sm:flex">
-          <h2 className="max-w-xl text-3xl sm:text-4xl">
-            Working on something that belongs here?
-          </h2>
-          <div className="mt-8 sm:mt-0">
-            <Link
-              href={withUtm("/contact", "portfolio-cta")}
-              className="btn btn-primary"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
       </section>
     </>
   );
