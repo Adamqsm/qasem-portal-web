@@ -4,6 +4,7 @@ import { buildMetadata, siteJsonLd } from "@/lib/seo";
 import { withUtm } from "@/lib/utm";
 import JsonLd from "@/components/JsonLd";
 import CueCard from "@/components/CueCard";
+import { CUE_URL, FOUNDER } from "@/lib/site";
 
 /**
  * The homepage title carries the brand first and then the company's own
@@ -11,16 +12,21 @@ import CueCard from "@/components/CueCard";
  * result nothing to match on and a reader nothing to read. Both halves are
  * the hero sentence verbatim.
  *
+ * Dubai sits in the title (Nov 2026 pass): brand and company searches are
+ * Dubai-first, and "Qasem Portal Dubai" is the query a counterparty checking
+ * the company runs. It is stated, not targeted: there is still no geo
+ * markup, service area or Business Profile (see docs/seo-maintenance.md).
+ *
  * The description names Cue on purpose. The likeliest route to this page is
  * someone who met Cue first and wants to know what company stands behind it;
  * a snippet that answers that question in the result earns the click.
  */
 export const metadata: Metadata = buildMetadata({
   path: "",
-  title: "Qasem Portal · Technology company building modern applications",
+  title: "Qasem Portal · Technology company registered in Dubai, UAE",
   absoluteTitle: true,
   description:
-    "Qasem Portal builds and operates app-driven ventures for hospitality and adjacent sectors. Cue is its first venture. Registered in Dubai, United Arab Emirates.",
+    "Qasem Portal is a technology company registered in Dubai, United Arab Emirates, building modern applications for hospitality. It is the company behind Cue.",
 });
 
 /**
@@ -36,6 +42,30 @@ export const metadata: Metadata = buildMetadata({
  * described by what it builds and operates; Cue is its first venture, not
  * its identity. No em-dashes, no group-structure jargon, no figures.
  */
+
+/**
+ * "Qasem Portal in brief": the facts a search engine or an AI assistant
+ * should be able to quote verbatim, in one server-rendered place. Every row
+ * is a fact the site states elsewhere or Adam confirmed for this pass, and
+ * the Organization schema repeats exactly these (name, Dubai address,
+ * founder, Cue). Nothing here is aimed at a machine rather than a reader;
+ * it is the same register a visitor sees.
+ */
+const BRIEF_ROWS = [
+  { term: "Company", detail: "Qasem Portal" },
+  {
+    term: "What it does",
+    detail:
+      "Builds and operates modern applications for hospitality and adjacent sectors",
+  },
+  { term: "Registered in", detail: "Dubai, United Arab Emirates" },
+  { term: "Founder", detail: FOUNDER },
+  {
+    term: "Venture",
+    link: "Cue",
+    detail: ", a restaurant reservation and venue booking app from Amman, Jordan",
+  },
+] as const;
 
 /** The direction, stated as intent. */
 const DIRECTION_ROWS = [
@@ -121,6 +151,40 @@ export default function Home() {
               <CueCard headingLevel="h3" />
             </li>
           </ul>
+        </div>
+      </section>
+
+      {/* In brief: the quotable statement and its register. */}
+      <section aria-labelledby="brief-heading" className="container-site">
+        <div className="border-t border-line py-20 sm:py-28">
+          <h2 id="brief-heading" className="text-2xl sm:text-[2rem]">
+            Qasem Portal in brief.
+          </h2>
+          <p className="mt-6 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
+            Qasem Portal is a technology company registered in Dubai, United
+            Arab Emirates, and founded by {FOUNDER}. It builds and operates
+            modern applications for hospitality and adjacent sectors. Its
+            venture is Cue, a restaurant reservation and venue booking app
+            from Amman, Jordan.
+          </p>
+          <dl className="mt-10 max-w-3xl border-t border-line">
+            {BRIEF_ROWS.map((row) => (
+              <div
+                key={row.term}
+                className="grid gap-1 border-b border-line py-4 sm:grid-cols-[11rem_1fr] sm:gap-8"
+              >
+                <dt className="caps-label self-center">{row.term}</dt>
+                <dd className="text-base text-ink">
+                  {"link" in row && (
+                    <a href={CUE_URL} className="link">
+                      {row.link}
+                    </a>
+                  )}
+                  {row.detail}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

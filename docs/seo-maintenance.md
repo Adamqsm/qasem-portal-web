@@ -2,16 +2,25 @@
 
 Repeatable upkeep so visibility compounds without re-auditing from scratch.
 The baseline, and the reasoning behind the decisions this doc assumes, live in
-[seo-audit-2026-09.md](./seo-audit-2026-09.md). Update the log at the bottom
+[seo-audit-2026-09.md](./seo-audit-2026-09.md) and the November pass in
+[seo-audit-2026-11.md](./seo-audit-2026-11.md). Update the log at the bottom
 each run.
 
-**The one rule to keep in mind while doing any of this:** this site is not geo
-targeted. Qasem Portal has no premises, no service area and no local trade;
-the reader worth catching is an investor or a counterparty who could be
-anywhere. If a step below ever tempts you toward a Google Business Profile, a
-`LocalBusiness` type, a geo coordinate or a place name in a keyword, the
-answer is no. See "If the company changes shape" at the bottom for the one
-circumstance that would reopen it.
+**The one rule to keep in mind while doing any of this:** Dubai is stated,
+not targeted. Since the November 2026 pass the brand is Dubai-first in its
+title and description, because "Qasem Portal Dubai" is the search a
+counterparty checking the company runs. But Qasem Portal has no premises that
+receive visitors, no service area and no local trade, and the investor worth
+catching could be anywhere. If a step below ever tempts you toward a Google
+Business Profile, a `LocalBusiness` type, a geo coordinate or a service area,
+the answer is no. See "If the company changes shape" at the bottom for the
+circumstances that would reopen it.
+
+**The facts live in three places that must agree:** the "Qasem Portal in
+brief" block on the homepage (`BRIEF_ROWS` and the paragraph above it in
+`src/app/page.tsx`), the Organization node in `src/lib/seo.ts`, and
+`public/llms.txt`. Change one, change all three; the tests in
+`src/lib/__tests__/ai-visibility.test.ts` catch most drift.
 
 ## Monthly check (~30 min, first Monday)
 
@@ -81,7 +90,27 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
    `lastModified` when its content actually changes, and leave it alone when
    it does not.
 
-7. **Rich Results.** Run the homepage and `/portfolio` through
+7. **Generative AI report.** Search Console, Performance, "Generative AI"
+   (live for all sites since 31 Aug 2026). Record impressions and clicks
+   from AI Overviews and AI Mode in the run log. Leave Settings, "Search
+   generative AI" on: opting out removes the site from AI answers and gains
+   nothing here.
+
+8. **Bing Webmaster Tools.** [bing.com/webmasters](https://www.bing.com/webmasters):
+   Search Performance, then AI Performance (Copilot and Bing AI citations),
+   then IndexNow (submissions received from the deploy Action). Bing's index
+   feeds Copilot and is drawn on by other AI answer engines, so this is where
+   AI visibility shows up first. If the IndexNow panel shows nothing after a
+   deploy, check the `indexnow` workflow run in GitHub Actions.
+
+9. **AI assistant spot-check.** Ask two or three assistants (ChatGPT search,
+   Perplexity, Claude, Copilot, Gemini) "What is Qasem Portal?" and "Which
+   company is behind the Cue restaurant app?". Record what they say and what
+   they cite, verbatim. Answers vary run to run; this is a snapshot for
+   direction, not a score. A wrong fact means one of the three places above
+   is unclear or an off-site profile disagrees with the site.
+
+10. **Rich Results.** Run the homepage and `/portfolio` through
    [Google's Rich Results Test](https://search.google.com/test/rich-results)
    and the [Schema Markup Validator](https://validator.schema.org). Neither
    page is expected to earn a rich result; the point is that the graph parses
@@ -90,6 +119,20 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
    Cue-web emits. If Cue-web ever changes its origin or node id, the join
    between the two graphs breaks silently and nothing in either repo's tests
    would catch it.
+
+## After every production deploy
+
+Automatic: `.github/workflows/indexnow.yml` submits every sitemap URL to
+IndexNow when Vercel reports a successful production deployment. If it did
+not run (the Actions tab shows no `indexnow` run for that deploy), run it by
+hand from the Actions tab, or from a checkout:
+
+```bash
+npm run indexnow
+```
+
+Google does not use IndexNow. For a page whose content changed materially,
+also use Search Console, URL Inspection, Request Indexing.
 
 ## Quarterly (with a monthly run)
 
@@ -101,9 +144,10 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
   is the one doing the work, and the test of it is whether someone who has
   only heard of Cue would understand from the snippet alone what this
   company is.
-- **Check `sameAs`.** Still the highest-value open item. If a company
-  LinkedIn page (or any other profile the company genuinely controls) now
-  exists, add it and re-run the Rich Results test.
+- **Check `sameAs`.** The company LinkedIn page is in (Nov 2026). Make sure
+  its name, one-line description and Dubai location still match the brief
+  block. Add any other profile only once the company controls it.
+- **Re-read `public/llms.txt`** against the brief block and the page list.
 - **Check the Cue-web side of the join.** Cue's `Organization` node citing
   Qasem Portal back, via `parentOrganization` pointing at
   `https://www.qasem-portal.com/#organization`, would make the relationship
@@ -116,7 +160,10 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
 
 | Trigger | Action |
 |---|---|
-| **A real company profile exists** (LinkedIn, Crunchbase, a registry listing) | Add the URL to `SAME_AS` in `src/lib/site.ts`. One line, and the strongest entity signal available to this site. Re-run the Rich Results test after deploy. |
+| **A real company profile exists** (Crunchbase, a registry listing; LinkedIn is in) | Add the URL to `SAME_AS` in `src/lib/site.ts` and to `public/llms.txt`. Re-run the Rich Results test after deploy. |
+| **Adam confirms the founding date** | Add it to the brief block, `foundingDate` on the Organization node, and `public/llms.txt` in one change, then drop "foundingDate" from the "asserts no facts the site does not state" test deliberately. |
+| **1 Feb 2027: Bing starts honouring AI training and grounding preferences** | Nothing to publish while both should stay allowed (the default). If Adam ever wants to stop AI training, the shared line is `User-Agent: __usage_ai-training` with `Disallow: /` (Bing from Feb 2027, Google early 2027). Never block search or grounding. |
+| **A route is added or removed** | Also add or remove it in `public/llms.txt`. |
 | **A second venture is established** | Add it to the portfolio's `ItemList` in `portfolioJsonLd`, with its own canonical `@id` matching whatever that venture's own site publishes, and to the `subOrganization` set on the Organization node (which becomes an array). Revisit the homepage copy, which currently states there is one venture. Also reconsider geo schema at this point, but only per the note below. |
 | **A press mention or third-party write-up appears** | Record it in the run log. If the piece is substantive and the publisher is credible, it is also a candidate for `Organization.subjectOf`. |
 | **The company publishes anything with a date** (an announcement, a report, a note) | That is the first content this site would have. It needs its own route, `Article` or `NewsArticle` schema with a real `datePublished`, an entry in `PAGES`, and an OG card. Do not retrofit dated schema onto the existing undated pages. |
@@ -145,9 +192,15 @@ way that narrows rather than widens who finds it.
 
 ## One-time, still owed
 
-Two steps need a signed-in browser and were not completed in the audit pass
-because the machine's Chrome went offline. Neither is urgent, and neither is
-a code change.
+Steps that need a signed-in browser. None is a code change.
+
+- **Bing Webmaster Tools** (Nov 2026 pass): add the site (import from Search
+  Console is fastest), submit `https://www.qasem-portal.com/sitemap.xml`,
+  and after the first deploy of the November pass confirm the IndexNow panel
+  shows the submission.
+
+The two below were owed from September because the machine's Chrome went
+offline.
 
 - **Request Indexing** on all six URLs, through Search Console's URL
   Inspection tool. On a two-day-old domain with zero inbound links this is
@@ -174,3 +227,4 @@ open.
 | Date | Clicks/Impr (3mo) | Avg pos | Indexed | Ext. links | Notes |
 |---|---|---|---|---|---|
 | 2026-09-04 | 0 / 0 | n/a | **0** | **0** | Baseline, two days after go-live. GSC verified, all reports still "processing data". Sitemap submitted and read the same day: Success, 5 pages discovered. `site:` returns nothing. Brand SERP is occupied by unrelated people and firms sharing the Qasem surname. Full audit and the fixes shipped in this pass: [seo-audit-2026-09.md](./seo-audit-2026-09.md). |
+| 2026-11-04 | not read | not read | not read | not read | November pass ([seo-audit-2026-11.md](./seo-audit-2026-11.md)). GSC not reachable from the session; numbers owed by the next browser run. Live site blocked by the session's network too, so the audit ran on a local production build: Lighthouse mobile 96 to 99 before, 97 to 99 after, A11y/BP/SEO 100. Web search (non-Google) for "Qasem Portal" and the domain: site absent, results are unrelated Qasem people and Gulf government portals. Shipped: Dubai-first title, brief block, `sameAs` LinkedIn, `founder`, llms.txt, IndexNow, `/admin/` disallow. |

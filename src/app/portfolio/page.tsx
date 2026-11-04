@@ -7,9 +7,9 @@ import CueCard from "@/components/CueCard";
 
 export const metadata: Metadata = buildMetadata({
   path: "/portfolio",
-  title: "Portfolio",
+  title: "Portfolio: Cue",
   description:
-    "The ventures of Qasem Portal. Cue, the first, is a restaurant reservation and venue booking app operating in Amman, Jordan.",
+    "Cue, the restaurant reservation and venue booking app from Amman, Jordan, is the venture Qasem Portal builds and operates.",
   keywords: ["Qasem Portal ventures", "Cue venture", "Cue restaurant reservation app"],
 });
 

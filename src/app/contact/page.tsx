@@ -5,7 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import ContactForm from "@/components/ContactForm";
 
 const DESCRIPTION =
-  "Two paths to reach Qasem Portal: general inquiries about the company or its ventures, and careers. Both are read directly.";
+  "Contact Qasem Portal, the Dubai-registered technology company behind Cue. Two paths: general inquiries and careers. Both are read directly.";
 
 export const metadata: Metadata = buildMetadata({
   path: "/contact",

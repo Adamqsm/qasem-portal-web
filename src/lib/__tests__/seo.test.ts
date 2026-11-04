@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildMetadata, ORG_ID, pageJsonLd, portfolioJsonLd, siteJsonLd } from "@/lib/seo";
-import { CUE_ORG_ID, KEYWORDS, PAGES, SITE_URL } from "@/lib/site";
+import { CUE_ORG_ID, FOUNDER, KEYWORDS, PAGES, SITE_URL } from "@/lib/site";
 
 /** Every node in a graph, flattened, so assertions can search the whole tree. */
 function walk(value: unknown, out: Record<string, unknown>[] = []) {
@@ -95,8 +95,17 @@ describe("the organization graph", () => {
     }
   });
 
-  it("omits sameAs entirely rather than shipping an empty array", () => {
-    expect(graphOf(siteJsonLd())[0]).not.toHaveProperty("sameAs");
+  it("carries only verified profiles in sameAs: the company LinkedIn page", () => {
+    expect(graphOf(siteJsonLd())[0].sameAs).toEqual([
+      "https://www.linkedin.com/company/qasem-portal",
+    ]);
+  });
+
+  it("names the founder the homepage names, as a Person", () => {
+    expect(graphOf(siteJsonLd())[0].founder).toEqual({
+      "@type": "Person",
+      name: FOUNDER,
+    });
   });
 
   it("joins Cue by the same @id Cue-web publishes", () => {
