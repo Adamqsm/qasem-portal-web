@@ -4,7 +4,7 @@ import { buildMetadata, siteJsonLd } from "@/lib/seo";
 import { withUtm } from "@/lib/utm";
 import JsonLd from "@/components/JsonLd";
 import CueCard from "@/components/CueCard";
-import { CUE_URL, FOUNDER } from "@/lib/site";
+import { CUE_URL, FOUNDER, FOUNDING_YEAR } from "@/lib/site";
 
 /**
  * The homepage title carries the brand first and then the company's own
@@ -48,7 +48,7 @@ export const metadata: Metadata = buildMetadata({
  * should be able to quote verbatim, in one server-rendered place. Every row
  * is a fact the site states elsewhere or Adam confirmed for this pass, and
  * the Organization schema repeats exactly these (name, Dubai address,
- * founder, Cue). Nothing here is aimed at a machine rather than a reader;
+ * founding year, founder, Cue). Nothing here is aimed at a machine rather than a reader;
  * it is the same register a visitor sees.
  */
 const BRIEF_ROWS = [
@@ -59,6 +59,7 @@ const BRIEF_ROWS = [
       "Builds and operates modern applications for hospitality and adjacent sectors",
   },
   { term: "Registered in", detail: "Dubai, United Arab Emirates" },
+  { term: "Founded", detail: FOUNDING_YEAR },
   { term: "Founder", detail: FOUNDER },
   {
     term: "Venture",
@@ -105,8 +106,7 @@ export default function Home() {
         <p className="anim-rise-2 mt-8 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
           Qasem Portal builds and operates app-driven ventures, with an initial
           focus on the hospitality sector. The company is structured to house
-          multiple ventures. Cue, the first, is the only one in operation
-          today.
+          multiple ventures. Cue, the first, is the only one today.
         </p>
         <div className="anim-rise-2 mt-10">
           <Link href="/portfolio" className="btn btn-primary">
@@ -162,7 +162,8 @@ export default function Home() {
           </h2>
           <p className="mt-6 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
             Qasem Portal is a technology company registered in Dubai, United
-            Arab Emirates, and founded by {FOUNDER}. It builds and operates
+            Arab Emirates, and founded by {FOUNDER} in {FOUNDING_YEAR}. It
+            builds and operates
             modern applications for hospitality and adjacent sectors. Its
             venture is Cue, a restaurant reservation and venue booking app
             from Amman, Jordan.

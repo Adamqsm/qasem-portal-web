@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildMetadata, ORG_ID, pageJsonLd, portfolioJsonLd, siteJsonLd } from "@/lib/seo";
-import { CUE_ORG_ID, FOUNDER, KEYWORDS, PAGES, SITE_URL } from "@/lib/site";
+import { CUE_ORG_ID, FOUNDER, FOUNDING_YEAR, KEYWORDS, PAGES, SITE_URL } from "@/lib/site";
 
 /** Every node in a graph, flattened, so assertions can search the whole tree. */
 function walk(value: unknown, out: Record<string, unknown>[] = []) {
@@ -83,7 +83,6 @@ describe("the organization graph", () => {
   it("asserts no facts the site does not state", () => {
     const org = graphOf(siteJsonLd())[0];
     for (const invented of [
-      "foundingDate",
       "numberOfEmployees",
       "telephone",
       "email",
@@ -99,6 +98,11 @@ describe("the organization graph", () => {
     expect(graphOf(siteJsonLd())[0].sameAs).toEqual([
       "https://www.linkedin.com/company/qasem-portal",
     ]);
+  });
+
+  it("carries the founding year Adam confirmed, year only", () => {
+    expect(graphOf(siteJsonLd())[0].foundingDate).toBe(FOUNDING_YEAR);
+    expect(FOUNDING_YEAR).toBe("2026");
   });
 
   it("names the founder the homepage names, as a Person", () => {

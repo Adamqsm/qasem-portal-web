@@ -3,6 +3,7 @@ import {
   CUE_ORG_ID,
   CUE_URL,
   FOUNDER,
+  FOUNDING_YEAR,
   KEYWORDS,
   KNOWS_ABOUT,
   SAME_AS,
@@ -83,10 +84,10 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
  * coordinate, no service area, and no locality-shaped keyword anywhere in
  * this file: the audience is any investor or counterparty, anywhere.
  *
- * Facts only. No invented street address, phone, founding date, headcount,
- * or legal entity name. The graph carries what the site itself states,
- * nothing more: the founder and the LinkedIn profile appear because the
- * homepage's "Qasem Portal in brief" block states them. `legalName` stays
+ * Facts only. No invented street address, phone, headcount, or legal
+ * entity name. The graph carries what the site itself states, nothing
+ * more: the founding year, the founder and the LinkedIn profile appear
+ * because the homepage's "Qasem Portal in brief" block states them. `legalName` stays
  * off this graph while the legal naming work is held for counsel.
  *
  * `subOrganization` is schema.org vocabulary rather than site copy, and it is
@@ -104,6 +105,7 @@ function organizationNode() {
     description: SITE_DESCRIPTION,
     disambiguatingDescription: SITE_DISAMBIGUATION,
     knowsAbout: [...KNOWS_ABOUT],
+    foundingDate: FOUNDING_YEAR,
     founder: { "@type": "Person", name: FOUNDER },
     address: {
       "@type": "PostalAddress",

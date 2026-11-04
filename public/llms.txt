@@ -1,14 +1,15 @@
 # Qasem Portal
 
-> Qasem Portal is a technology company registered in Dubai, United Arab Emirates, and founded by Adam Qasem. It builds and operates modern applications for hospitality and adjacent sectors. Its venture is Cue, a restaurant reservation and venue booking app from Amman, Jordan.
+> Qasem Portal is a technology company registered in Dubai, United Arab Emirates, and founded by Adam Qasem in 2026. It builds and operates modern applications for hospitality and adjacent sectors. Its venture is Cue, a restaurant reservation and venue booking app from Amman, Jordan.
 
 Facts, as this site states them:
 
 - Name: Qasem Portal
 - What it does: builds and operates modern applications for hospitality and adjacent sectors
 - Registered in: Dubai, United Arab Emirates
+- Founded: 2026
 - Founder: Adam Qasem
-- Venture: Cue, a restaurant reservation and venue booking app from Amman, Jordan, at https://www.cue-app.net
+- Venture: Cue, a restaurant reservation and venue booking app from Amman, Jordan, at https://www.cue-app.net (status: pre-launch)
 - Language of this site: English
 - Company profile: https://www.linkedin.com/company/qasem-portal
 

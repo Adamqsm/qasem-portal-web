@@ -4,25 +4,29 @@ import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import Home from "@/app/page";
+import PortfolioPage from "@/app/portfolio/page";
 import { siteJsonLd } from "@/lib/seo";
-import { FOUNDER, SAME_AS, SITE_URL } from "@/lib/site";
+import { FOUNDER, FOUNDING_YEAR, SAME_AS, SITE_URL } from "@/lib/site";
 
 const publicDir = join(process.cwd(), "public");
 
 /** The homepage as a crawler receives it: server-rendered HTML, no JavaScript. */
-const html = renderToStaticMarkup(createElement(Home));
-const text = html.replace(/<[^>]+>/g, "").replace(/&#x27;/g, "'");
+const textOf = (html: string) => html.replace(/<[^>]+>/g, "").replace(/&#x27;/g, "'");
+const text = textOf(renderToStaticMarkup(createElement(Home)));
+const portfolioText = textOf(renderToStaticMarkup(createElement(PortfolioPage)));
 
 describe("the 'Qasem Portal in brief' block", () => {
   it("is in the server-rendered homepage, as one quotable statement", () => {
     expect(text).toContain("Qasem Portal in brief.");
     expect(text).toContain(
-      `Qasem Portal is a technology company registered in Dubai, United Arab Emirates, and founded by ${FOUNDER}.`
+      `Qasem Portal is a technology company registered in Dubai, United Arab Emirates, and founded by ${FOUNDER} in ${FOUNDING_YEAR}.`
     );
   });
 
   it("shows every fact the Organization schema asserts beyond name and URL", () => {
     const org = (siteJsonLd() as { "@graph": Record<string, unknown>[] })["@graph"][0];
+    expect(org.foundingDate).toBe(FOUNDING_YEAR);
+    expect(text).toContain(`Founded${FOUNDING_YEAR}`);
     expect(org.founder).toMatchObject({ name: FOUNDER });
     expect(text).toContain(FOUNDER);
     expect(org.address).toMatchObject({ addressLocality: "Dubai", addressCountry: "AE" });
@@ -30,10 +34,24 @@ describe("the 'Qasem Portal in brief' block", () => {
     expect(text).toContain("Cue, a restaurant reservation and venue booking app from Amman, Jordan");
   });
 
-  it("states no date, figure or address the site does not already state", () => {
+  it("states no date, figure or address beyond the confirmed founding year", () => {
     const brief = text.slice(text.indexOf("Qasem Portal in brief."));
-    expect(brief).not.toMatch(/\b(19|20)\d{2}\b/);
+    const years = brief.match(/\b(19|20)\d{2}\b/g) ?? [];
+    expect(new Set(years)).toEqual(new Set([FOUNDING_YEAR]));
     expect(brief).not.toMatch(/Office|Al Qusais|\+971/);
+  });
+});
+
+describe("Cue's status and the single-venture copy", () => {
+  it("shows Cue as pre-launch, never as in operation", () => {
+    for (const page of [text, portfolioText]) {
+      expect(page).toContain("Pre-launch, Amman");
+      expect(page).not.toMatch(/in operation/i);
+    }
+  });
+
+  it("does not invite or announce further ventures on the portfolio", () => {
+    expect(portfolioText).not.toMatch(/further ventures|belongs here/i);
   });
 });
 
@@ -60,6 +78,7 @@ describe("llms.txt", () => {
 
   it("repeats the founder and registration the homepage states", () => {
     expect(llms).toContain(`Founder: ${FOUNDER}`);
+    expect(llms).toContain(`Founded: ${FOUNDING_YEAR}`);
     expect(llms).toContain("Registered in: Dubai, United Arab Emirates");
   });
 });

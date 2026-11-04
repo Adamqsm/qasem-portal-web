@@ -65,14 +65,18 @@ IndexNow) and give every engine one plain statement to quote.
    of the same facts. It is what an assistant should quote, and the schema
    repeats exactly it.
 3. **Schema.** `sameAs` now carries the company LinkedIn page; `founder`
-   names Adam Qasem as a `Person`. `disambiguatingDescription` names the
-   founder and drops "first venture". No `foundingDate`, `legalName`,
-   street address or phone: the first is unconfirmed, the rest are held for
-   counsel or by Adam's rule.
+   names Adam Qasem as a `Person`; `foundingDate` is "2026" (year only, by
+   Adam's decision; it matches the LinkedIn page). `disambiguatingDescription`
+   names the founder and the year and drops "first venture". No
+   `legalName`, street address or phone: held for counsel or by Adam's rule.
 4. **Copy rule.** "Cue is its first venture" in metadata and schema became
    "the company behind Cue" / "its venture is Cue", so nothing implies a
    wider portfolio. Cue is described as "from Amman, Jordan", matching
-   cue-app.net.
+   cue-app.net. On Adam's decisions of 4 Nov: the portfolio's "Further
+   ventures will be listed here" note and its "Working on something that
+   belongs here?" call-out are gone; the Cue card's status reads
+   "Pre-launch, Amman" (no venue is onboarded yet), and the homepage hero no
+   longer calls Cue "in operation".
 5. **llms.txt** at the root: the same facts and links, in the llmstxt.org
    shape.
 6. **IndexNow**: key file at the root, `scripts/indexnow.mjs`
@@ -81,8 +85,10 @@ IndexNow) and give every engine one plain statement to quote.
    and can be run by hand from the Actions tab.
 7. **robots.txt** also disallows `/admin/`, matching cue-app.net.
 8. **Tests** pin all of it: the brief block is in the server HTML and shows
-   every fact the schema asserts, the brief states no date or street
-   address, `sameAs` holds only the verified profile, llms.txt links only to
+   every fact the schema asserts, the brief states no date but the founding
+   year and no street address, Cue reads "Pre-launch" and never "in
+   operation", the portfolio announces no further ventures, `sameAs` holds
+   only the verified profile, llms.txt links only to
    this site, Cue and verified profiles, and there is exactly one valid
    IndexNow key file.
 
@@ -97,13 +103,18 @@ IndexNow) and give every engine one plain statement to quote.
   Dubai" is now matched in the title and the first line of the description.
   Investors elsewhere still match on the brand alone; nothing narrows the
   entity to a locality.
-- **Founding date left out** until Adam confirms it (licence issue date or
-  the date he counts from). It goes into the brief block, llms.txt and
-  `foundingDate` together, in one small change.
+- **Founding year 2026, year only** (Adam, 4 Nov 2026), in the brief block,
+  llms.txt and `foundingDate` together.
+- **Cue's status is "Pre-launch, Amman"** everywhere this site states it,
+  until a venue is live.
+- **No wider portfolio implied.** Lines that announced or invited further
+  ventures were removed from the portfolio page. Remaining forward-looking
+  lines on the homepage ("structured to house multiple ventures", "Cue, the
+  first", the Goals row) were left as they are: not part of the decision.
 
 ## 5. Verification
 
-- `npx vitest run`: 88 tests, green.
+- `npx vitest run`: 91 tests, green.
 - `npx tsc --noEmit`: clean. `npm run lint`: clean.
 - `node scripts/copy-guard.mjs`: clean.
 - `npm run build`: clean; prerendered HTML read back for titles,

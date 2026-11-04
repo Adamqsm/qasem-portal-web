@@ -58,7 +58,7 @@ const REGISTER: { term: string; detail: string }[] = [
   { term: "Sector", detail: "Hospitality" },
   { term: "Languages", detail: "English and Arabic" },
   { term: "Initial market", detail: "Amman, Jordan" },
-  { term: "Status", detail: "In operation" },
+  { term: "Status", detail: "Pre-launch, Amman" },
 ];
 
 /** Real product screens (Cue-web's own captures), 960 x 2087 each. */

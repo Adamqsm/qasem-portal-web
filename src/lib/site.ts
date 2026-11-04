@@ -24,7 +24,7 @@ export const SITE_DESCRIPTION =
  * the site itself states.
  */
 export const SITE_DISAMBIGUATION =
-  "A technology company registered in Dubai, United Arab Emirates, and founded by Adam Qasem, that builds and operates app-driven ventures for hospitality and adjacent sectors. Its venture is Cue, a restaurant reservation and venue booking app from Amman, Jordan.";
+  "A technology company registered in Dubai, United Arab Emirates, and founded by Adam Qasem in 2026, that builds and operates app-driven ventures for hospitality and adjacent sectors. Its venture is Cue, a restaurant reservation and venue booking app from Amman, Jordan.";
 
 /** Cue's canonical origin and Organization node id (matches Cue-web's graph). */
 export const CUE_URL = "https://www.cue-app.net";
@@ -51,6 +51,14 @@ export const SAME_AS: readonly string[] = [
  * what that block shows.
  */
 export const FOUNDER = "Adam Qasem";
+
+/**
+ * Founding year, confirmed by Adam on 4 Nov 2026 (it matches the company
+ * LinkedIn page). Year only, by his decision: emitted as
+ * `Organization.foundingDate` ("2026" is a valid ISO 8601 date) and shown in
+ * the homepage brief block and llms.txt.
+ */
+export const FOUNDING_YEAR = "2026";
 
 /**
  * Topics the company is about. Not claims about size, funding, or structure —
