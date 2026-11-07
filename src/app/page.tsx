@@ -105,8 +105,9 @@ export default function Home() {
         />
         <p className="anim-rise-2 mt-8 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
           Qasem Portal builds and operates modern applications for the
-          hospitality sector. Its venture is Cue, a restaurant reservation and
-          venue booking app in pre-launch in Amman, Jordan.
+          hospitality sector. Its current venture is Cue, a restaurant
+          reservation and venue booking app preparing to launch in Amman,
+          Jordan.
         </p>
         <div className="anim-rise-2 mt-10">
           <Link href="/portfolio" className="btn btn-primary">

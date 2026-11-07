@@ -111,8 +111,9 @@ IndexNow) and give every engine one plain statement to quote.
 - **No wider portfolio implied.** Lines that announced or invited further
   ventures were removed from the portfolio page, and the homepage hero now
   reads "Qasem Portal builds and operates modern applications for the
-  hospitality sector. Its venture is Cue, a restaurant reservation and venue
-  booking app in pre-launch in Amman, Jordan." (Adam, 7 Nov 2026). Still on
+  hospitality sector. Its current venture is Cue, a restaurant reservation
+  and venue booking app preparing to launch in Amman, Jordan." (Adam's
+  wording, 7 Nov 2026). Still on
   the homepage and not yet decided: the "One venture today." heading with
   "Cue is our first venture.", and the Goals row's "a company structure that
   can house further ventures".
