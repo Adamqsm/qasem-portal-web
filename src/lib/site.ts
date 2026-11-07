@@ -24,7 +24,7 @@ export const SITE_DESCRIPTION =
  * the site itself states.
  */
 export const SITE_DISAMBIGUATION =
-  "A technology company registered in Dubai, United Arab Emirates, that builds and operates app-driven ventures for hospitality and adjacent sectors. Cue, a restaurant reservation and venue booking app operating in Amman, Jordan, is its first venture.";
+  "A technology company registered in Dubai, United Arab Emirates, and founded by Adam Qasem in 2026, that builds and operates app-driven ventures for hospitality and adjacent sectors. Its venture is Cue, a restaurant reservation and venue booking app from Amman, Jordan.";
 
 /** Cue's canonical origin and Organization node id (matches Cue-web's graph). */
 export const CUE_URL = "https://www.cue-app.net";
@@ -33,15 +33,32 @@ export const CUE_ORG_ID = `${CUE_URL}/#organization`;
 /**
  * Verified profiles the company controls, emitted as `Organization.sameAs`.
  *
- * Deliberately empty. `sameAs` is the strongest entity-resolution signal
- * available to a site with no press coverage, but every entry has to be a
- * profile that actually exists and that Qasem Portal actually owns; a broken
- * or borrowed URL here is worse than no URL at all. Add the company LinkedIn
- * page the day it exists (Cue's own graph carries
- * `https://www.linkedin.com/company/cuebooking`), then re-run the Rich
+ * `sameAs` is the strongest entity-resolution signal available to a site
+ * with no press coverage, so every entry has to be a profile that actually
+ * exists and that Qasem Portal actually owns; a broken or borrowed URL here
+ * is worse than none. The company LinkedIn page was confirmed by Adam on
+ * 4 Nov 2026. Add any further profile (a registry listing, Crunchbase) only
+ * once it is real and controlled by the company, then re-run the Rich
  * Results test.
  */
-export const SAME_AS: string[] = [];
+export const SAME_AS: readonly string[] = [
+  "https://www.linkedin.com/company/qasem-portal",
+];
+
+/**
+ * The founder, as named in the "Qasem Portal in brief" block on the
+ * homepage. Emitted as `Organization.founder`; the schema only ever repeats
+ * what that block shows.
+ */
+export const FOUNDER = "Adam Qasem";
+
+/**
+ * Founding year, confirmed by Adam on 4 Nov 2026 (it matches the company
+ * LinkedIn page). Year only, by his decision: emitted as
+ * `Organization.foundingDate` ("2026" is a valid ISO 8601 date) and shown in
+ * the homepage brief block and llms.txt.
+ */
+export const FOUNDING_YEAR = "2026";
 
 /**
  * Topics the company is about. Not claims about size, funding, or structure —
@@ -74,6 +91,8 @@ export const KNOWS_ABOUT = [
 export const KEYWORDS = [
   "Qasem Portal",
   "Qasem Portal Dubai",
+  "Qasem Portal UAE",
+  "Adam Qasem",
   "company behind Cue",
   "Cue app company",
   "technology company Dubai",
@@ -98,10 +117,10 @@ export const NAV_ITEMS = [
  * dates mean nothing. Bump the entry when the page actually changes.
  */
 export const PAGES = [
-  { path: "", label: "Home", lastModified: "2026-09-04", changeFrequency: "monthly" },
-  { path: "/portfolio", label: "Portfolio", lastModified: "2026-09-04", changeFrequency: "monthly" },
+  { path: "", label: "Home", lastModified: "2026-11-04", changeFrequency: "monthly" },
+  { path: "/portfolio", label: "Portfolio", lastModified: "2026-11-04", changeFrequency: "monthly" },
   { path: "/careers", label: "Career Growth and Learning", lastModified: "2026-09-04", changeFrequency: "yearly" },
-  { path: "/contact", label: "Contact", lastModified: "2026-09-04", changeFrequency: "yearly" },
+  { path: "/contact", label: "Contact", lastModified: "2026-11-04", changeFrequency: "yearly" },
   { path: "/legal/privacy", label: "Privacy Policy", lastModified: "2026-10-02", changeFrequency: "yearly" },
   { path: "/legal/terms", label: "Terms of Use", lastModified: "2026-10-02", changeFrequency: "yearly" },
 ] as const;
