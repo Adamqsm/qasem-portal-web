@@ -104,9 +104,9 @@ export default function Home() {
           aria-hidden="true"
         />
         <p className="anim-rise-2 mt-8 max-w-measure font-serif text-[1.25rem] leading-[1.6] text-muted">
-          Qasem Portal builds and operates app-driven ventures, with an initial
-          focus on the hospitality sector. The company is structured to house
-          multiple ventures. Cue, the first, is the only one today.
+          Qasem Portal builds and operates modern applications for the
+          hospitality sector. Its venture is Cue, a restaurant reservation and
+          venue booking app in pre-launch in Amman, Jordan.
         </p>
         <div className="anim-rise-2 mt-10">
           <Link href="/portfolio" className="btn btn-primary">

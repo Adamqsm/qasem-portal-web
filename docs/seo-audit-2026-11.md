@@ -75,8 +75,9 @@ IndexNow) and give every engine one plain statement to quote.
    cue-app.net. On Adam's decisions of 4 Nov: the portfolio's "Further
    ventures will be listed here" note and its "Working on something that
    belongs here?" call-out are gone; the Cue card's status reads
-   "Pre-launch, Amman" (no venue is onboarded yet), and the homepage hero no
-   longer calls Cue "in operation".
+   "Pre-launch, Amman" (no venue is onboarded yet), and the homepage hero
+   names Cue as the company's venture, in pre-launch, with no "first" or
+   "multiple ventures".
 5. **llms.txt** at the root: the same facts and links, in the llmstxt.org
    shape.
 6. **IndexNow**: key file at the root, `scripts/indexnow.mjs`
@@ -108,13 +109,17 @@ IndexNow) and give every engine one plain statement to quote.
 - **Cue's status is "Pre-launch, Amman"** everywhere this site states it,
   until a venue is live.
 - **No wider portfolio implied.** Lines that announced or invited further
-  ventures were removed from the portfolio page. Remaining forward-looking
-  lines on the homepage ("structured to house multiple ventures", "Cue, the
-  first", the Goals row) were left as they are: not part of the decision.
+  ventures were removed from the portfolio page, and the homepage hero now
+  reads "Qasem Portal builds and operates modern applications for the
+  hospitality sector. Its venture is Cue, a restaurant reservation and venue
+  booking app in pre-launch in Amman, Jordan." (Adam, 7 Nov 2026). Still on
+  the homepage and not yet decided: the "One venture today." heading with
+  "Cue is our first venture.", and the Goals row's "a company structure that
+  can house further ventures".
 
 ## 5. Verification
 
-- `npx vitest run`: 91 tests, green.
+- `npx vitest run`: 92 tests, green.
 - `npx tsc --noEmit`: clean. `npm run lint`: clean.
 - `node scripts/copy-guard.mjs`: clean.
 - `npm run build`: clean; prerendered HTML read back for titles,

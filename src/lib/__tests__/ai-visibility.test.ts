@@ -53,6 +53,13 @@ describe("Cue's status and the single-venture copy", () => {
   it("does not invite or announce further ventures on the portfolio", () => {
     expect(portfolioText).not.toMatch(/further ventures|belongs here/i);
   });
+
+  it("names Cue as the venture in the hero, with no 'first' or 'multiple ventures'", () => {
+    expect(text).toContain(
+      "Its venture is Cue, a restaurant reservation and venue booking app in pre-launch in Amman, Jordan."
+    );
+    expect(text).not.toMatch(/multiple ventures|Cue, the first/);
+  });
 });
 
 describe("llms.txt", () => {
