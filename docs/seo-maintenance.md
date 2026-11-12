@@ -123,9 +123,12 @@ All Search Console reports: property `sc-domain:qasem-portal.com` at
 ## After every production deploy
 
 Automatic: `.github/workflows/indexnow.yml` submits every sitemap URL to
-IndexNow when Vercel reports a successful production deployment. If it did
-not run (the Actions tab shows no `indexnow` run for that deploy), run it by
-hand from the Actions tab, or from a checkout:
+IndexNow when Vercel reports a successful production deployment. It never goes
+red: if the key file is not live yet it skips quietly (a notice in the run),
+and any other failure is a warning, so read the run's annotations, not its
+colour. If the Actions tab shows no `indexnow` run for a deploy, or a warning,
+run it by hand there, or from a checkout (by hand, a real failure exits
+non-zero):
 
 ```bash
 npm run indexnow
