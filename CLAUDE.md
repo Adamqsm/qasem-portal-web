@@ -8,3 +8,5 @@ Enforcement: `node scripts/copy-guard.mjs`, run from the repo root and configure
 
 ## Merging
 A merge to main here is a production deploy. Do not merge. Stop at READY.
+Never push to main or a tag here.
+Ask Adam before anything involving money, secrets or credentials, deleting data, a production system, or a message to anyone outside.
