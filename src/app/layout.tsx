@@ -6,6 +6,8 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import UtmCapture from "@/components/UtmCapture";
+import Analytics from "@/components/Analytics";
+import { isProductionDeploy } from "@/lib/analytics";
 
 /**
  * Typography: EB Garamond carries the display voice (the brand's own serif
@@ -92,6 +94,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingContact />
+        <Analytics enabled={isProductionDeploy(process.env.VERCEL_ENV)} />
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 /**
  * UTM attribution, first-party only, ported from Cue-web.
  *
- * The site has no analytics; attribution rides on the records a visitor
+ * Attribution rides on the records a visitor
  * chooses to submit through the contact and careers forms, so it is possible
  * to know later which channel a real inquiry came from. Two halves:
  *
