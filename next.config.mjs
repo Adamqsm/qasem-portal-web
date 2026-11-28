@@ -13,9 +13,13 @@
  *   every page out of static rendering — not a trade worth making for a
  *   statically generated corporate site. 'unsafe-eval' is NOT granted.
  * - challenges.cloudflare.com is Cloudflare Turnstile: the api.js script tag
- *   plus the challenge iframe. No other third party loads anything.
+ *   plus the challenge iframe.
+ * - Google Analytics 4 (production only, after consent): the hosts below are
+ *   Google's list for GA without advertising features (developers.google.com
+ *   /tag-platform/security/guides/csp), plus *.analytics.google.com, the
+ *   regional collection endpoint. No other third party loads anything.
  * - There is no client-side Firebase SDK in this app (all Firestore access is
- *   server-side through the Admin SDK), so connect-src needs no Google hosts.
+ *   server-side through the Admin SDK), so the Google hosts in connect-src are for Analytics only.
  * - Fonts are self-hosted through next/font, hence `font-src 'self'`.
  */
 const csp = [
@@ -24,11 +28,11 @@ const csp = [
   "object-src 'none'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
+  "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  "img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com",
   "font-src 'self'",
-  "connect-src 'self' https://challenges.cloudflare.com",
+  "connect-src 'self' https://challenges.cloudflare.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.google.com",
   "frame-src https://challenges.cloudflare.com",
   "worker-src 'self'",
   "manifest-src 'self'",

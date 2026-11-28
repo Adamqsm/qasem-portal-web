@@ -4,6 +4,7 @@ import { buildMetadata, pageJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import { COMPANY } from "@/lib/site";
 import { LegalSection, LegalShell } from "@/components/LegalShell";
+import ConsentReset from "@/components/ConsentReset";
 
 const DESCRIPTION =
   "How Qasem Portal handles the information submitted through this site: what is collected, why, where it is stored, and the choices you have.";
@@ -14,7 +15,7 @@ export const metadata: Metadata = buildMetadata({
   description: DESCRIPTION,
 });
 
-const UPDATED = "October 2, 2026";
+const UPDATED = "November 27, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -42,9 +43,10 @@ export default function PrivacyPage() {
 
       <LegalSection heading="What this site collects">
         <p>
-          This site has no accounts, no analytics, and no advertising. The only
-          personal information it collects is what you choose to type into the
-          contact or careers form:
+          This site has no accounts and no advertising. The only personal
+          information it collects directly is what you choose to type into the
+          contact or careers form (anonymous usage statistics are described
+          under Analytics below):
         </p>
         <ul>
           <li>your name and email address,</li>
@@ -62,6 +64,33 @@ export default function PrivacyPage() {
           itself is not kept with your submission, and the hash expires from
           use within minutes.
         </p>
+      </LegalSection>
+
+      <LegalSection heading="Analytics">
+        <p>
+          Only if you accept, this site uses Google Analytics to collect
+          anonymous usage statistics, such as which pages are visited, to
+          improve the site. Nothing is collected unless you choose Accept in
+          the banner shown on your first visit. We do not use advertising
+          features: Google signals and ad personalization are switched off, and
+          the statistics are not used for advertising.
+        </p>
+        <p>You can change your choice at any time.</p>
+        <ConsentReset />
+        <div
+          lang="ar"
+          dir="rtl"
+          className="space-y-4 border-t border-line pt-4 text-ink"
+        >
+          <p className="font-serif text-xl">التحليلات</p>
+          <p className="text-muted">
+            بموافقتك فقط، يستخدم هذا الموقع خدمة Google Analytics لجمع إحصاءات
+            استخدام مجهولة الهوية، مثل الصفحات التي تُزار، بهدف تحسين الموقع. لا
+            يُجمع أي شيء ما لم تختر «قبول» في الشريط الظاهر عند زيارتك الأولى.
+            لا نستخدم أي ميزات إعلانية: إشارات Google وتخصيص الإعلانات متوقفان،
+            ولا تُستخدم الإحصاءات لأغراض إعلانية. يمكنك تغيير اختيارك في أي وقت.
+          </p>
+        </div>
       </LegalSection>
 
       <LegalSection heading="How it is used">
@@ -92,6 +121,11 @@ export default function PrivacyPage() {
             <strong>Resend</strong>, which delivers the notification email,
           </li>
           <li>
+            <strong>Google Analytics</strong>, only if you accept analytics,
+            which receives anonymous usage statistics as described under
+            Analytics,
+          </li>
+          <li>
             <strong>Cloudflare Turnstile</strong>, which checks that a
             submission comes from a person and not a script. Turnstile runs
             when you use a form and may process your network address and
@@ -103,12 +137,14 @@ export default function PrivacyPage() {
 
       <LegalSection heading="Cookies and browser storage">
         <p>
-          The site sets no cookies. It uses two small pieces of browser
-          storage, both functional: your light or dark theme choice, kept on
-          your device, and the first campaign parameters of your visit, kept
-          for the browser session only so a submission you choose to send can
-          record how you found us. Neither identifies you, and neither is
-          shared with third parties.
+          Unless you accept analytics, the site sets no cookies. It uses three
+          small pieces of browser storage: your light or dark theme choice and
+          your analytics choice (accepted or declined), both kept on your
+          device, and the first campaign parameters of your visit, kept for the
+          browser session only so a submission you choose to send can record
+          how you found us. None of them identifies you, and none is shared
+          with third parties. If you accept analytics, Google Analytics also
+          sets its own cookies on your device.
         </p>
       </LegalSection>
 
